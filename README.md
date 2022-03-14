@@ -22,12 +22,15 @@ pip install auto-py-to-exe
 auto-py-to-exe
 </li>
 <li>
-To include the NODC logo use the following option inside auto-py-to-exe:
+add the following files: legenda.txt, logo.png
+</li>
+<li>
+To include the MLM logo use the following option inside auto-py-to-exe:
 <br>
 --hidden-import='PIL._tkinter_finder'
 </li>
 <li>
-FOR WINDOWS ONLY with ANACONDA:
+FOR WINDOWS ONLY, with ANACONDA:
 <br>
 --exclude-module scikit-learn,PyQt5,PyQt4,2to3,IPython,Jinja2,pycparser,scipy
  </li>
