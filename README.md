@@ -12,20 +12,23 @@ This is done following the specifications of the official guidelines published b
 
 
 
-To create an exe (Linux/Windows):
-
+# How To create an exe (Linux/Windows):
+<ul>
+<il>
 https://pypi.org/project/auto-py-to-exe/
 <br>
 pip install auto-py-to-exe
 <br>
 auto-py-to-exe
-
-
+</il>
+<il>
 To include the NODC logo use the following option inside auto-py-to-exe:
 <br>
 --hidden-import='PIL._tkinter_finder'
-
-
+</il>
+<il>
 FOR WINDOWS ONLY with ANACONDA:
 <br>
 --exclude-module scikit-learn,PyQt5,PyQt4,2to3,IPython,Jinja2,pycparser,scipy
+ </il>
+</ul>
