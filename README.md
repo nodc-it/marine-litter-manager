@@ -35,7 +35,3 @@ FOR WINDOWS ONLY, with ANACONDA:
 --exclude-module scikit-learn,PyQt5,PyQt4,2to3,IPython,Jinja2,pycparser,scipy
  </li>
 </ol>
-
-# License
-
-The code is distribuited under the <a href="https://github.com/teamdigitale/licenses/blob/master/EUPL-1.2">EUPL-1.2 license</a>
