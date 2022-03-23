@@ -6,8 +6,7 @@
   <td>
 <img src="img/test2.png" width="300"> 
   </td>
-  </tr>
- <tr>
+
   <td>
 Marine Litter Manager (MLM) is a Python data formatting tool that can be used to generate:
 
