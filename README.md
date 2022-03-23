@@ -3,6 +3,7 @@
 <center>
 <table border ="0">
  <tr>
+  <td>
 <img src="img/test2.png" width="300"> 
   </td>
   </tr>
