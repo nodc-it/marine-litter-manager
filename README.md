@@ -1,7 +1,7 @@
 # Marine-Litter-Manager
 
 
-Marine Litter Manager (MLM) is a Python data formatting tool that can be used to generate:
+<img src="img/test2.png" width="300"> Marine Litter Manager (MLM) is a Python data formatting tool that can be used to generate:
 
  
 <ul>
@@ -13,6 +13,11 @@ This is done following the specifications of the official guidelines published b
 # Screenshots
 <center>
 <table border ="0">
+ <tr>
+  <td colspan="2">
+<img src="img/main.png" width="600">
+  </td>
+  </tr>
  <tr>
   <td>
 <img src="img/10.png" width="300">
