@@ -10,7 +10,59 @@ Marine Litter Manager (MLM) is a Python data formatting tool that can be used to
 </ul>
 This is done following the specifications of the official guidelines published by EMODnet Chemistry ( https://www.emodnet-chemistry.eu/ ). It is available for Linux and Windows. 
 
-
+# Screenshots
+<center>
+<table border ="0">
+ <tr>
+  <td>
+<img src="img/10.png" width="300">
+  </td>
+  <td>
+<img src="img/11.png" width="300">
+  </td>
+  </tr>
+  <tr>
+  <td>
+<img src="img/12.png" width="300">
+  </td>
+  <td>
+<img src="img/13.png" width="300">
+  </td>
+  </tr>
+  <tr>
+  <td>
+<img src="img/104.png" width="300">
+  </td>
+  <td>
+<img src="img/15.png" width="300">
+  </td>
+  </tr>
+  <tr>
+  <td>
+<img src="img/16.png" width="300">
+  </td>
+  <td>
+<img src="img/17.png" width="300">
+  </td>
+  </tr>
+  <tr>
+  <td>
+<img src="img/18.png" width="300">
+  </td>
+  <td>
+<img src="img/19.png" width="300">
+  </td>
+  </tr>
+  <tr>
+  <td>
+<img src="img/20.png" width="300">
+  </td>
+  <td>
+<img src="img/21.png" width="300">
+  </td>
+  </tr>
+ </table>
+</center>
 
 # How To create an exe (Linux/Windows):
 <ol>
@@ -35,13 +87,4 @@ FOR WINDOWS ONLY, with ANACONDA:
 --exclude-module scikit-learn,PyQt5,PyQt4,2to3,IPython,Jinja2,pycparser,scipy
  </li>
 </ol>
-<table>
- <tr>
-  <td>
-<img src="img/10.png" width="300">
-  </td>
-  <td>
-<img src="img/11.png" width="300">
-  </td>
-  </tr>
- </table>
+
