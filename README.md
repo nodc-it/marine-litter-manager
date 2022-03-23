@@ -31,7 +31,7 @@ This is done following the specifications of the official guidelines published b
   </tr>
   <tr>
   <td>
-<img src="img/104.png" width="300">
+<img src="img/14.png" width="300">
   </td>
   <td>
 <img src="img/15.png" width="300">
