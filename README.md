@@ -35,4 +35,13 @@ FOR WINDOWS ONLY, with ANACONDA:
 --exclude-module scikit-learn,PyQt5,PyQt4,2to3,IPython,Jinja2,pycparser,scipy
  </li>
 </ol>
-<img src="img/10.png">
+<table>
+ <tr>
+  <td>
+<img src="img/10.png" width="300">
+  </td>
+  <td>
+<img src="img/11.png" width="300">
+  </td>
+  </tr>
+ </table>
