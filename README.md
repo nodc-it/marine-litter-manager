@@ -35,3 +35,4 @@ FOR WINDOWS ONLY, with ANACONDA:
 --exclude-module scikit-learn,PyQt5,PyQt4,2to3,IPython,Jinja2,pycparser,scipy
  </li>
 </ol>
+<img src="img/10.png">
