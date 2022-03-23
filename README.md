@@ -3,7 +3,7 @@
 <center>
 <table border ="0">
  <tr>
-  <td>
+  <td valign="top">
 <img src="img/test2.png" width="300"> 
   </td>
 
