@@ -1,14 +1,25 @@
 # Marine-Litter-Manager
 
+<center>
+<table border ="0">
+ <tr>
+<img src="img/test2.png" width="300"> 
+  </td>
+  </tr>
+ <tr>
+  <td>
+Marine Litter Manager (MLM) is a Python data formatting tool that can be used to generate:
 
-<img src="img/test2.png" width="300"> Marine Litter Manager (MLM) is a Python data formatting tool that can be used to generate:
-
- 
+   
 <ul>
   <li>EMODnet beach litter format</li>
   <li>EMODnet seafloor trawlings litter format</li>
 </ul>
 This is done following the specifications of the official guidelines published by EMODnet Chemistry ( https://www.emodnet-chemistry.eu/ ). It is available for Linux and Windows. 
+</td>
+  </tr>
+ </table>
+</center>
 
 # Screenshots
 <center>
