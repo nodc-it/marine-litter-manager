@@ -1,0 +1,57 @@
+
+name: Python application
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  build-windows:
+
+    runs-on: windows-latest
+
+    steps:
+    - uses: actions/checkout@v2
+    - name: Set up Python 3
+      uses: actions/setup-python@v3
+      with:
+        python-version: "3.x"
+    - name: Install dependencies
+      run: |
+        python -m pip install --upgrade pip
+        pip install pyinstaller
+        if exist requirements.txt pip install -r requirements.txt
+      shell: cmd
+    - name: Build with pyinstaller
+      run: |
+        pyinstaller --noconfirm --onefile --windowed --icon "./resources/logo.ico" --add-data "./resources;." --hidden-import "PIL._tkinter_finder"  mlm.py
+    - uses: actions/upload-artifact@v3
+      with:
+        name: mlm-windows
+        path: ./dist/
+
+
+  build-linux:
+
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v2
+    - name: Set up Python 3
+      uses: actions/setup-python@v3
+      with:
+        python-version: "3.x"
+    - name: Install dependencies
+      run: |
+        python -m pip install --upgrade pip
+        pip install pyinstaller
+        if [ -f requirements.txt ]; then pip install -r requirements.txt; fi
+    - name: Build with pyinstaller
+      run: |
+        pyinstaller --noconfirm --onefile --windowed --icon ./resources/logo.ico --add-data ./resources:. --hidden-import PIL._tkinter_finder  mlm.py
+    - uses: actions/upload-artifact@v3
+      with:
+        name: mlm-linux
+        path: ./dist/
