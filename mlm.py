@@ -540,7 +540,7 @@ class MarineLitterManager:
         #         'clearlyu arabic extra')
 
         self.labelOGCNODC = Label(self.formats, text=mytext, bg="SkyBlue2", fg="black", font=appHighlightFont, height=3, width=76)
-        self.labelOGCNODC['text'] = 'MARINE LITTER MANAGER developed by NODC\nNational Oceanographic Data Center - OGS https://nodc.ogs.trieste.it'
+        self.labelOGCNODC['text'] = 'MARINE LITTER MANAGER developed by NODC\nNational Oceanographic Data Center - OGS https://nodc.ogs.it'
         self.labelOGCNODC.grid(row=0, column=0, columnspan=10, rowspan=10, padx=25, pady=55)
 
         self.FormatBeachLitterButton = Button(self.formats, text="BEACH LITTER FORMAT", width=103, font=('helvetica','9','bold'),background = 'white', command=(showbeachlitter))
