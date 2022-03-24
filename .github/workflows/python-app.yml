@@ -50,7 +50,7 @@ jobs:
         if [ -f requirements.txt ]; then pip install -r requirements.txt; fi
     - name: Build with pyinstaller
       run: |
-        pyinstaller --noconfirm --onefile --windowed --icon "./resources/logo.ico" --add-data "./resources;." --hidden-import "PIL._tkinter_finder"  mlm.py
+        pyinstaller --noconfirm --onefile --windowed --icon ./resources/logo.ico --add-data ./resources;. --hidden-import PIL._tkinter_finder  mlm.py
     - uses: actions/upload-artifact@v3
       with:
         name: mlm-windows
