@@ -29,7 +29,7 @@ The specific video tutorials are available at the following link: https://www.em
 pip install pyinstaller
 pip install -r requirements.txt
 
-pyinstaller --noconfirm --onefile --windowed --icon ./resources/logo.ico --add-data ./resources;. --hidden-import PIL._tkinter_finder  mlm.py
+pyinstaller --noconfirm --onefile --windowed --icon "./resources/logo.ico" --add-data "./resources;." --hidden-import "PIL._tkinter_finder"  mlm.py
 ```
 If you are using Anaconda you must exclude some modules with the `--exclude-module` option: `--exclude-module scikit-learn,PyQt5,PyQt4,2to3,IPython,Jinja2,pycparser,scipy`
 ### Linux
