@@ -23,6 +23,7 @@ jobs:
         python -m pip install --upgrade pip
         pip install pyinstaller
         if exist requirements.txt pip install -r requirements.txt
+      shell: cmd
     - name: Build with pyinstaller
       run: |
         pyinstaller --noconfirm --onefile --windowed --icon "./resources/logo.ico" --add-data "./resources;." --hidden-import "PIL._tkinter_finder"  mlm.py
