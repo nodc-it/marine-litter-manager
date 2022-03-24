@@ -23,13 +23,22 @@ The specific video tutorials are available at the following link: https://www.em
 * Dictionary search engine
 * Links
 
-## How to create an exe (Linux/Windows)
-1. https://pypi.org/project/auto-py-to-exe/
-`pip install auto-py-to-exe`
-2. `auto-py-to-exe`
-3. add the following files: legend.txt, logo.png
-4. To include the MLM logo use the following option inside auto-py-to-exe: `--hidden-import='PIL._tkinter_finder'`
-5. FOR WINDOWS ONLY, with ANACONDA: `--exclude-module scikit-learn,PyQt5,PyQt4,2to3,IPython,Jinja2,pycparser,scipy`
+## How to build an executable
+### Windows
+```batch
+pip install pyinstaller
+pip install -r requirements.txt
+
+pyinstaller --noconfirm --onefile --windowed --icon ./resources/logo.ico --add-data ./resources;. --hidden-import PIL._tkinter_finder  mlm.py
+```
+If you are using Anaconda you must exclude some modules with the `--exclude-module` option: `--exclude-module scikit-learn,PyQt5,PyQt4,2to3,IPython,Jinja2,pycparser,scipy`
+### Linux
+```bash
+pip install pyinstaller
+pip install -r requirements.txt
+
+pyinstaller --noconfirm --onefile --windowed --icon ./resources/logo.ico --add-data ./resources:. --hidden-import PIL._tkinter_finder  mlm.py
+```
 
 ## Screenshots
 
