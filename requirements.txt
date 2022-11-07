@@ -3,6 +3,6 @@ matplotlib==3.5.1
 numpy==1.22.3
 Pillow==9.0.1
 requests==2.27.1
-xlrd==2.0.1
-xlsxwriter==3.0.3
+xlrd==1.2.0
+xlsxwriter==1.2.7
 xlutils==2.0.0
