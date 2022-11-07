@@ -1,9 +1,9 @@
-beautifulsoup4
-matplotlib
-numpy
-Pillow
-requests
-xlrd
-xlsxwriter
-xlutils
+beautifulsoup4==4.10.0
+matplotlib==3.5.1
+numpy==1.22.3
+Pillow==9.0.1
+requests==2.27.1
+xlrd==1.2.0
+xlsxwriter==1.2.7
+xlutils==2.0.0
 tornado>=5

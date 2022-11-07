@@ -4,18 +4,22 @@
 from tkinter import Tk, Label, Button, StringVar, Entry,NONE, END,HORIZONTAL,N, W, E, S, Checkbutton,Radiobutton, IntVar, Radiobutton, Scrollbar, Listbox, LEFT, BOTH, Spinbox, Menu, Text, NORMAL
 import tkinter as tk
 from tkinter import ttk
-
+#For more themes
+#from ttkthemes import ThemedTk
 import math
-# to create a dialog interface for the input/output file
+# to create a dialog interface for the input file
 from tkinter.filedialog import askopenfilename
+#from tkinter.filedialog import asksavefilename
 from tkinter.filedialog import asksaveasfile
 
 # to manage a different font
 from tkinter import font
 
+
 # need this to check if a a file exists
 import os
 import sys
+
 
 # to read the XLS file
 import xlrd
@@ -29,8 +33,11 @@ from xlutils.copy import copy
 import datetime
 import time
 
+
 # to manage SEA FLOOR format
 import csv
+
+
 
 # to manage images
 from PIL import Image, ImageTk
@@ -44,10 +51,14 @@ import numpy as np
 # to map the surveys on GoogleMaps using the browser
 import webbrowser
 
+
 # for the web scraping on BODC VOCABS
 from bs4 import BeautifulSoup
 import requests
 
+
+# ONLY FOR TEST
+# Only for test Poland_output_Alex_20-04-2018_V3.xls
 
 '''
 To create an exe (Linux/Windows):
@@ -64,6 +75,14 @@ To include the NODC logo use the following option inside auto-py-to-exe:
 FOR WINDOWS ONLY with ANACONDA:
 --exclude-module scikit-learn,PyQt5,PyQt4,2to3,IPython,Jinja2,pycparser,scipy
 
+
+
+TO ADD NEW THEMES:
+pip install ttkthemes
+
+N.B. The themes plastik, clearlooks and elegance are recommended to make your
+UI look nicer on all platforms when using Tkinter and the ttk extensions in Python.
+ When you are targeting Ubuntu, consider using the great radiance theme.
 '''
 
 class MarineLitterManager:
@@ -241,6 +260,9 @@ class MarineLitterManager:
     'Notes',]
 
 
+#spostare i campi timestamp (shot_timestamp) e 
+#l'haul duration (haul_dur)  nella "parte delle survey"
+
 
     FIELDSURVEYSSEAFLOOR=['SurveyName',
     'ProjectCode',
@@ -306,11 +328,8 @@ class MarineLitterManager:
         #self.nb.tab(2, state="normal")
         #self.nb.tab(2, state="hidden")
 
-        
-        
         frameFont = ttk.Style()
         frameFont.configure('new.TFrame', family='Verdana', size=8, weight='bold', underline=1)
-        
         # Defines and places the notebook widget
         self.nb = ttk.Notebook(self.master)
         self.nb.grid(row=1, column=0, columnspan=50, rowspan=49, sticky='NESW')
@@ -326,6 +345,7 @@ class MarineLitterManager:
         # Adds tab of the notebook
         self.beachesBL = ttk.Frame(self.nb)
         self.nb.add(self.beachesBL, text='BEACHES')
+
          
         # Adds tab of the notebook
         self.surveyBL = ttk.Frame(self.nb)
@@ -339,9 +359,12 @@ class MarineLitterManager:
         self.plotBL = ttk.Frame(self.nb)
         self.nb.add(self.plotBL, text='SURVEYS PLOT')
 
+
+
         # Adds tab of the notebook
         self.scatterBL = ttk.Frame(self.nb)
         self.nb.add(self.scatterBL, text='PARAMS PLOT')
+
 
         # Adds tab of the notebook
         self.infoSF = ttk.Frame(self.nb)
@@ -351,17 +374,21 @@ class MarineLitterManager:
         self.surveySF = ttk.Frame(self.nb)
         self.nb.add(self.surveySF, text='SURVEYS')
 
+
        # Adds tab of the notebook
         self.litterSF = ttk.Frame(self.nb)
         self.nb.add(self.litterSF, text='LITTER')
+
 
        # Adds tab of the notebook
         self.plotSF = ttk.Frame(self.nb)
         self.nb.add(self.plotSF, text='SURVEYS PLOT')
 
+
        # Adds tab of the notebook
         self.scatterSF = ttk.Frame(self.nb)
         self.nb.add(self.scatterSF, text='PARAMS PLOT')
+
 
         # Adds tab of the notebook
         self.infoCML = ttk.Frame(self.nb)
@@ -370,6 +397,7 @@ class MarineLitterManager:
         # Adds tab of the notebook
         self.infoOSML = ttk.Frame(self.nb)
         self.nb.add(self.infoOSML, text='OPEN SEA MACRO LITTER')
+
 
         # Adds tab of the notebook
         self.dictionary = ttk.Frame(self.nb)
@@ -458,6 +486,7 @@ class MarineLitterManager:
         '''
         START here we add a cascading menu
         '''
+        # START here we add a cascading menu
         self.emptymenu = Menu(self.master)
         self.menuBL = Menu(self.master)
         self.menuSF = Menu(self.master)
@@ -504,50 +533,56 @@ class MarineLitterManager:
         START FORMATS
         '''
         appHighlightFont = font.Font(family='helvetica', size=12, weight='bold', underline=1)
-        
-        #This is only a reminder abut the available fonts
-        #
-        #        print(font.families())
-        #        AVAILABLE FONTS on TKINTER
-        #        ('fangsong ti', 
-        #         'fixed', 
-        #         'clearlyu alternate glyphs', 
-        #         'charter', 
-        #         'lucidatypewriter', 
-        #         'courier 10 pitch', 
-        #         'lucidabright', 
-        #         'times', 
-        #         'open look glyph', 
-        #         'bitstream charter', 
-        #         'song ti', 'helvetica', 
-        #         'open look cursor', 
-        #         'newspaper', 
-        #         'clearlyu ligature', 
-        #         'mincho', 
-        #         'clearlyu devangari extra', 
-        #         'clearlyu pua', 
-        #         'courier', 
-        #         'clearlyu', 
-        #         'lucida', 
-        #         'clean', 
-        #         'nil', 
-        #         'clearlyu arabic', 
-        #         'clearlyu devanagari', 
-        #         'terminal', 
-        #         'symbol', 
-        #         'gothic', 
-        #         'new century schoolbook', 
-        #         'clearlyu arabic extra')
+#        print(font.families())
+#        AVAILABLE FONTS on TKINTER
+#        ('fangsong ti', 
+#         'fixed', 
+#         'clearlyu alternate glyphs', 
+#         'charter', 
+#         'lucidatypewriter', 
+#         'courier 10 pitch', 
+#         'lucidabright', 
+#         'times', 
+#         'open look glyph', 
+#         'bitstream charter', 
+#         'song ti', 'helvetica', 
+#         'open look cursor', 
+#         'newspaper', 
+#         'clearlyu ligature', 
+#         'mincho', 
+#         'clearlyu devangari extra', 
+#         'clearlyu pua', 
+#         'courier', 
+#         'clearlyu', 
+#         'lucida', 
+#         'clean', 
+#         'nil', 
+#         'clearlyu arabic', 
+#         'clearlyu devanagari', 
+#         'terminal', 
+#         'symbol', 
+#         'gothic', 
+#         'new century schoolbook', 
+#         'clearlyu arabic extra')
 
         self.labelOGCNODC = Label(self.formats, text=mytext, bg="SkyBlue2", fg="black", font=appHighlightFont, height=3, width=76)
+        #self.labelOGCNODC['text'] = 'NODC - National Oceanographic Data Center - OGS\n https://nodc.ogs.trieste.it'
         self.labelOGCNODC['text'] = 'MARINE LITTER MANAGER developed by NODC\nNational Oceanographic Data Center - OGS https://nodc.ogs.it'
         self.labelOGCNODC.grid(row=0, column=0, columnspan=10, rowspan=10, padx=25, pady=55)
+
+
 
         self.FormatBeachLitterButton = Button(self.formats, text="BEACH LITTER FORMAT", width=103, font=('helvetica','9','bold'),background = 'white', command=(showbeachlitter))
         self.FormatBeachLitterButton.grid(row=11, column=0, sticky=W)
 
         self.FormatBeachLitterButtonSF = Button(self.formats, text="SEA FLOOR LITTER FORMAT", width=103, font=('helvetica','9','bold'),background = 'white', command=(showseafloorlitter))
         self.FormatBeachLitterButtonSF.grid(row=12, column=0, sticky=W)
+        
+        #self.FormatCoastalMacroLitterButton = Button(self.formats, text="COASTAL MACRO LITTER FORMAT", width=103, font=('helvetica','9','bold'),background = 'white', command=(showcoastalmacrolitter))
+        #self.FormatCoastalMacroLitterButton.grid(row=13, column=0, sticky=W)
+        
+        #self.FormatOpenSeaMacroLitterButton = Button(self.formats, text="OPEN SEA MACRO LITTER FORMAT", width=103, font=('helvetica','9','bold'),background = 'white', command=(showopenseamacrolitter))
+        #self.FormatOpenSeaMacroLitterButton.grid(row=14, column=0, sticky=W)
 
         self.UtilitiesButton = Button(self.formats, text="UTILITIES", width=103, font=('helvetica','9','bold'),background = 'white', command=(showutilities))
         self.UtilitiesButton.grid(row=15, column=0, sticky=W)
@@ -556,6 +591,9 @@ class MarineLitterManager:
         self.HideAllButton.grid(row=16, column=0, sticky=W)
 
 
+
+
+        #self.path = self.resource_path('NODC.gif')
         self.path = self.resource_path('logo.png')
         #Creates a Tkinter-compatible photo image, which can be used everywhere Tkinter expects an image object.
         self.img = ImageTk.PhotoImage(Image.open(self.path))
@@ -602,7 +640,10 @@ class MarineLitterManager:
         '''
         START INFO BEACH LITTER
         '''
-                
+        dummysheet=int(0)
+        
+        
+        
         self.labelEntryInfoBeaches = Label(self.infoBL, text=mytext)
         self.labelEntryInfoBeaches['text'] = 'The sheet for BEACHES: ' + str(mytext)
         self.labelEntryInfoBeaches.grid(row=1, column=0, sticky=E)
@@ -641,6 +682,11 @@ class MarineLitterManager:
         self.entryInfoInputFile = Entry(self.infoBL, width=20, validate="key")
         self.entryInfoInputFile.grid(row=3, column=3, sticky=W)
 
+
+
+        #self.saveXlsFileButton = Button(self.infoBL, text="Save Litter XLS File", command=(savefilexls))
+        #self.saveXlsFileButton.grid(row=4, column=2, sticky=E)
+
         self.labelInfoOutputFile = Label(self.infoBL, text=mytext)
         self.labelInfoOutputFile['text'] = 'Output file name (.xls): ' + str(mytext)
         self.labelInfoOutputFile.grid(row=4, column=2, sticky=E)
@@ -658,15 +704,21 @@ class MarineLitterManager:
         self.labelInfoOutputModelFile['text'] = 'Model file name (.csv): ' + str(mytext)
         self.labelInfoOutputModelFile.grid(row=6, column=2, sticky=E)
 
+        #self.saveModelFileButton = Button(self.infoBL, text="Save Model", command=(savefilemodel))
+        #self.saveModelFileButton.grid(row=6, column=2, sticky=E)
+
         self.entryInfoOutputModelFile = Entry(self.infoBL, width=20,state="readonly", validate="key")
         self.entryInfoOutputModelFile.grid(row=6, column=3, sticky=W)
+
 
         self.infoBLarea = Text(self.infoBL, height=45, width=106)
         self.infoBLarea.grid(row=59, column=0, columnspan=18, rowspan=30)
         self.infoBLarea.insert(END, "Marine Litter Manager Infobox:")
 
+
+
         self.labellegenda = Label(self.dictionary, text=mytext)
-        self.labellegenda['text'] = 'Search term or param: ' + str(mytext)
+        self.labellegenda['text'] = 'Search term: ' + str(mytext)
         self.labellegenda.grid(row=1, column=0, sticky=E)
 
         self.entrylegendaTerm = Entry(self.dictionary, width=20, validate="key")
@@ -703,6 +755,8 @@ class MarineLitterManager:
         self.buttonvarVocabBODClvF = Checkbutton(self.dictionary, text="P01 BODC VOCAB - BODC Parameter Usage Vocabulary (WEB SCRAPING). ATTENTION: TIME-CONSUMING SEARCH!", variable=self.varVocabBODClvF)
         self.buttonvarVocabBODClvF.grid(row=8, column=0,columnspan=10, sticky=W)
 
+
+
         self.legendaarea = Text(self.dictionary, height=45, width=106)
         self.legendaarea.grid(row=10, column=0, columnspan=18, rowspan=30, sticky=W)
         self.legendaarea.insert(END, "")
@@ -734,11 +788,13 @@ class MarineLitterManager:
         self.entryInfoLitterSF = Spinbox(self.infoSF, from_=1, to=10, textvariable= self.entryInfoLitterVarsSF, width=2, validate="key", validatecommand=(vcmd, '%P'))
         self.entryInfoLitterSF.grid(row=1, column=3, sticky=W)
 
+
         self.openInputFileButtonSF = Button(self.infoSF, text="Load Litter Input File", command=(openfileSF))
         self.openInputFileButtonSF.grid(row=3, column=0, sticky=E)
 
         self.entryInfoInputFileSF = Entry(self.infoSF, width=20, validate="key")
         self.entryInfoInputFileSF.grid(row=3, column=1, columnspan=3, sticky=W)
+
 
         self.labelInfoOutputFileSF = Label(self.infoSF, text=mytext)
         self.labelInfoOutputFileSF['text'] = 'Output file name (.xls): ' + str(mytext)
@@ -756,31 +812,41 @@ class MarineLitterManager:
         self.labelInfoOutputModelFileSF = Label(self.infoSF, text=mytext)
         self.labelInfoOutputModelFileSF['text'] = 'Model file name (.csv): ' + str(mytext)
         self.labelInfoOutputModelFileSF.grid(row=6, column=0, sticky=E)
+        
+
+
+        #self.saveModelFileButtonSF = Button(self.infoSF, text="Save Model", command=(savefilemodelSF))
+        #self.saveModelFileButtonSF.grid(row=6, column=2, sticky=E)
 
         self.entryInfoOutputModelFileSF = Entry(self.infoSF, width=20,state="readonly", validate="key")
         self.entryInfoOutputModelFileSF.grid(row=6, column=1, columnspan=3, sticky=W)
+
 
         self.labelRadioSeparatorCSV = Label(self.infoSF, text=mytext)
         self.labelRadioSeparatorCSV['text'] = 'Define the CSV output/plot separator' + str(mytext)
         self.labelRadioSeparatorCSV.grid(row=6, column=2, sticky=E)
 
         self.varRadioOutputCSV = tk.IntVar()
-        self.varRadioOutputCSV.set(1)
+        self.varRadioOutputCSV.set(2)
         self.R1Output = Radiobutton(self.infoSF, text="Tab", variable=self.varRadioOutputCSV, value=1, command=(changeLabelSep))
         self.R1Output.grid(row=6, column=3, sticky=E)
 
         self.R2Output = Radiobutton(self.infoSF, text="Comma", variable=self.varRadioOutputCSV, value=2, command=(changeLabelSep))
         self.R2Output.grid(row=6, column=4, sticky=E)
+        
 
         self.infoSFarea = Text(self.infoSF,wrap=NONE, height=45, width=106)
         self.infoSFarea.grid(row=59, column=0, columnspan=16, rowspan=30)
         self.infoSFarea.insert(END, "Marine Litter Manager Infobox:")
+        
+
 
         '''
         END INFO SEA FLOOR
         '''
 
-
+        #Here we add the fields for each tab
+        #TAB1 (self.beachesBL)
         '''
         START BEACHES BEACH LITTER
         '''
@@ -834,10 +900,10 @@ class MarineLitterManager:
         '''
         END BEACHES BEACH LITTER
         '''
+        #self.close_button = Button(self.beachesBL, text="Close", command=master.quit)
+        #self.close_button.grid(row=48, column=1, sticky=W+E)
 
-
-
-
+        #TAB2 (self.surveyBL)
         '''
         START SURVEYS BEACH LITTER
         '''
@@ -915,8 +981,8 @@ class MarineLitterManager:
         tmpcolumn=4
         self.entriesSurveysRowVarsSF = []
         self.entriesSurveysColVarsSF = []
-
-        for i in range(24): 
+        #for i in range(22):
+        for i in range(24): #two more fields
 
             mytext=self.FIELDSURVEYSSEAFLOOR[i]
             if tmpcolumn == 4:
@@ -1033,6 +1099,53 @@ class MarineLitterManager:
         self.SurveyNamesListSF = []
         self.ParamsNamesListSF = []
 
+        #When you have a different sheet for the params definitions
+        #self.var1ParDescSF = IntVar()
+        #self.ParDescSheetSF = Checkbutton(self.litterSF, text="Params definitions in another sheet", variable=self.var1ParDescSF)
+        #self.ParDescSheetSF.grid(row=i+tmprow+35, column=0, sticky=E)
+
+        #self.lbWichSheetSF = Label(self.litterSF, text=mytext)
+        #self.lbWichSheetSF['text'] = 'Wich sheet? (0 is the first sheet)'
+        #self.lbWichSheetSF.grid(row=i+tmprow+36, column=0, sticky=E)
+
+        #self.enWichSheetVarsSF = tk.IntVar()
+        #self.enWichSheetSF = Spinbox(self.litterSF, from_=0, to=10, width=2, textvariable= self.enWichSheetVarsSF, validate="key", validatecommand=(vcmd, '%P'))
+        #self.enWichSheetSF.grid(row=i+tmprow+36, column=1, sticky=W)
+
+
+        #self.lbWichSheetRowSF = Label(self.litterSF, text=mytext)
+        #self.lbWichSheetRowSF['text'] = 'Wich ID row? (0 is the first row)'
+        #self.lbWichSheetRowSF.grid(row=i+tmprow+37, column=0, sticky=E)
+
+        #self.enWichSheetRowVarsSF = tk.IntVar()
+        #self.enWichSheetRowSF = Spinbox(self.litterSF, from_=0, to=10, width=2, textvariable= self.enWichSheetRowVarsSF, validate="key", validatecommand=(vcmd, '%P'))
+        #self.enWichSheetRowSF.grid(row=i+tmprow+37, column=1, sticky=W)
+
+        #self.lbWichSheetColSF = Label(self.litterSF, text=mytext)
+        #self.lbWichSheetColSF['text'] = 'Wich ID col?'
+        #self.lbWichSheetColSF.grid(row=i+tmprow+38, column=0, sticky=E)
+
+        #self.enWichSheetColVarsSF = tk.IntVar()
+        #self.enWichSheetColSF = Spinbox(self.litterSF, values=self.LETTERS_ARRAY, textvariable= self.enWichSheetColVarsSF, width=3)
+        #self.enWichSheetColSF.grid(row=i+tmprow+38, column=1, sticky=W)
+
+        #self.lbWichSheetNameColSF = Label(self.litterSF, text=mytext)
+        #self.lbWichSheetNameColSF['text'] = 'Wich Name col?'
+        #self.lbWichSheetNameColSF.grid(row=i+tmprow+39, column=0, sticky=E)
+
+        #self.enWichSheetNameColVarsSF = tk.IntVar()
+        #self.enWichSheetNameColSF = Spinbox(self.litterSF, values=self.LETTERS_ARRAY, textvariable= self.enWichSheetNameColVarsSF, width=3)
+        #self.enWichSheetNameColSF.grid(row=i+tmprow+39, column=1, sticky=W)
+
+        #self.lbWichSheetOriginalNameColSF = Label(self.litterSF, text=mytext)
+        #self.lbWichSheetOriginalNameColSF['text'] = 'Wich Original Name col?'
+        #self.lbWichSheetOriginalNameColSF.grid(row=i+tmprow+40, column=0, sticky=E)
+
+        #self.enWichSheetOriginalNameColVarsSF = tk.IntVar()
+        #self.enWichSheetOriginalNameColSF = Spinbox(self.litterSF, values=self.LETTERS_ARRAY, textvariable= self.enWichSheetOriginalNameColVarsSF, width=3)
+        #self.enWichSheetOriginalNameColSF.grid(row=i+tmprow+40, column=1, sticky=W)
+
+
 
         '''
         END LITTER SEA FLOOR
@@ -1040,6 +1153,11 @@ class MarineLitterManager:
 
 
 
+        #self.close_buttonSurvey = Button(self.surveyBL, text="Close", command=master.quit)
+        #self.close_buttonSurvey.grid(row=59, column=1, sticky=W+E)
+
+
+        #TAB3 (self.animalLitterBL)
         '''
         START ANIMALS BEACH LITTER
         '''
@@ -1093,6 +1211,9 @@ class MarineLitterManager:
         '''
         END ANIMALS BEACH LITTER
         '''
+
+        #self.close_buttonAnimals = Button(self.animalLitterBL, text="Close", command=master.quit)
+        #self.close_buttonAnimals.grid(row=10, column=1, sticky=W+E)
 
 
         '''
@@ -1151,7 +1272,7 @@ class MarineLitterManager:
         self.BeachesNamesListUniq = []
         self.ParamsNamesList = []
 
-        #When the user has a different sheet for the params definitions
+        #When you have a different sheet for the params definitions
         self.var1ParDesc = IntVar()
         self.ParDescSheet = Checkbutton(self.animalLitterBL, text="Params definitions in another sheet", variable=self.var1ParDesc)
         self.ParDescSheet.grid(row=i+tmprow+35, column=0, sticky=E)
@@ -1203,6 +1324,8 @@ class MarineLitterManager:
         END LITTER BEACH LITTER
         '''
 
+        #self.close_buttonLitter = Button(self.animalLitterBL, text="Close", command=master.quit)
+        #self.close_buttonLitter.grid(row=28, column=1, sticky=W+E)
         
         self.createOutputModel = Button(self.animalLitterBL, text="Save Model", command=(savefilemodel))
         self.createOutputModel.grid(row=i+tmprow+30, column=3+tmpcolumn, sticky=E)
@@ -1211,9 +1334,12 @@ class MarineLitterManager:
         self.createOutput.grid(row=i+tmprow+30, column=4+tmpcolumn, sticky=E)
 
 
+        #TAB4 (self.plotBL)
         '''
         START PLOTS BEACH LITTER
         '''
+        #self.checkPlotsButton = Button(self.plotBL, text="Check for plots", command=(checkForPlots))
+        #self.checkPlotsButton.grid(row=1, column=1, sticky=E)
 
         self.checkPlotsButton = Button(self.plotBL, text="Load Beach Litter Survey Plot File", command=(openfilesurveyplot))
         self.checkPlotsButton.grid(row=1, column=1, sticky=E)
@@ -1221,12 +1347,17 @@ class MarineLitterManager:
         self.entryInfoInputFilePlotSurvey = Entry(self.plotBL, width=20, validate="key")
         self.entryInfoInputFilePlotSurvey.grid(row=1, column=2, sticky=W)
 
+
         self.ExecutePlotsButton = Button(self.plotBL, text="Execute", command=(plotMySurvey))
         self.ExecutePlotsButton.grid(row=1, column=5, sticky=E)
+
 
         self.varMoreInfoPlot = IntVar()
         self.buttonMoreInfoPlot = Checkbutton(self.plotBL, text="Params complete description (this could deform the plot)", variable=self.varMoreInfoPlot)
         self.buttonMoreInfoPlot.grid(row=2, column=1,columnspan=10, sticky=W)
+        
+        
+        
         
         self.varPiePlot = IntVar()
         self.buttonvarPiePlot = Checkbutton(self.plotBL, text="Pie Plot", variable=self.varPiePlot)
@@ -1240,6 +1371,8 @@ class MarineLitterManager:
         self.buttonvarVBarPlot = Checkbutton(self.plotBL, text="Vertical Bar Plot", variable=self.varVBarPlot)
         self.buttonvarVBarPlot.grid(row=5, column=1,columnspan=10, sticky=W)    
 
+
+
         self.varMapPlot = IntVar()
         self.buttonMapPlot = Checkbutton(self.plotBL, text="Show START coordinates of the survey (a web page will be opened on your browser)", variable=self.varMapPlot)
         self.buttonMapPlot.grid(row=6, column=1,columnspan=10, sticky=W)    
@@ -1248,6 +1381,8 @@ class MarineLitterManager:
         self.buttonMapPlotEnd = Checkbutton(self.plotBL, text="Show END coordinates of the survey (a web page will be opened on your browser)", variable=self.varMapPlotEnd)
         self.buttonMapPlotEnd.grid(row=7, column=1,columnspan=10, sticky=W)  
         
+
+
         self.mylistScrollListSurvey = Listbox(self.plotBL,height=40, width=80,selectmode='multiple')
 
 
@@ -1255,7 +1390,6 @@ class MarineLitterManager:
         '''
         END PLOTS BEACH LITTER
         '''
-
 
 
         '''
@@ -1269,6 +1403,7 @@ class MarineLitterManager:
         self.entryInfoInputFilePlotSurveySF = Entry(self.plotSF, width=20, validate="key")
         self.entryInfoInputFilePlotSurveySF.grid(row=1, column=2, sticky=W)
 
+
         self.ExecutePlotsButtonSF = Button(self.plotSF, text="Execute", command=(plotMySurveySF))
         self.ExecutePlotsButtonSF.grid(row=1, column=5, sticky=E)
         
@@ -1276,7 +1411,10 @@ class MarineLitterManager:
         self.labeMySeparatorCSVPlotSF = Label(self.plotSF, text=mytextseparator)        
         self.labeMySeparatorCSVPlotSF['text'] = 'The separator is ' + str(mytextseparator)
         self.labeMySeparatorCSVPlotSF.grid(row=1, column=6, sticky=E)
-               
+        
+
+
+        
         self.varPiePlotSF = IntVar()
         self.buttonvarPiePlotSF = Checkbutton(self.plotSF, text="Pie Plot", variable=self.varPiePlotSF)
         self.buttonvarPiePlotSF.grid(row=2, column=1,columnspan=10, sticky=W)
@@ -1288,6 +1426,8 @@ class MarineLitterManager:
         self.varVBarPlotSF = IntVar()
         self.buttonvarVBarPlotSF = Checkbutton(self.plotSF, text="Vertical Bar Plot", variable=self.varVBarPlotSF)
         self.buttonvarVBarPlotSF.grid(row=4, column=1,columnspan=10, sticky=W)    
+
+
 
         self.varMapPlotSF = IntVar()
         self.buttonMapPlotSF = Checkbutton(self.plotSF, text="Show START coordinates of the survey (a web page will be opened on your browser)", variable=self.varMapPlotSF)
@@ -1309,10 +1449,12 @@ class MarineLitterManager:
 
 
 
-
+        #TAB4 (self.scatterBL)
         '''
         START SCATTER PLOTS BEACH LITTER
         '''
+        #self.checkPlotsButtonParams = Button(self.scatterBL, text="Check for Params", command=(checkForPlotsParams))
+        #self.checkPlotsButtonParams.grid(row=1, column=1, sticky=E)
 
         self.checkPlotsButtonParams = Button(self.scatterBL, text="Load Beach Litter Params Plot File", command=(openfileparamsplot))
         self.checkPlotsButtonParams.grid(row=1, column=1, sticky=W)
@@ -1320,8 +1462,10 @@ class MarineLitterManager:
         self.entryInfoInputFilePlotParams = Entry(self.scatterBL, width=20, validate="key")
         self.entryInfoInputFilePlotParams.grid(row=1, column=2, sticky=W)
 
+
         self.ExecutePlotsButtonParams = Button(self.scatterBL, text="Execute", command=(plotMyParams))
         self.ExecutePlotsButtonParams.grid(row=1, column=5, sticky=E)
+
 
         self.varScatterPlot = IntVar()
         self.buttonvarScatterPlot = Checkbutton(self.scatterBL, text="Scatter 2D Plot", variable=self.varScatterPlot)
@@ -1356,12 +1500,14 @@ class MarineLitterManager:
         self.entryInfoInputFilePlotParamsSF = Entry(self.scatterSF, width=20, validate="key")
         self.entryInfoInputFilePlotParamsSF.grid(row=1, column=2, sticky=W)
 
+
         self.ExecutePlotsButtonParamsSF = Button(self.scatterSF, text="Execute", command=(plotMyParamsSF))
         self.ExecutePlotsButtonParamsSF.grid(row=1, column=5, sticky=E)
         
         self.labeMySeparatorCSVscatterSF = Label(self.scatterSF, text=mytextseparator)
         self.labeMySeparatorCSVscatterSF['text'] = 'The separator is ' + str(mytextseparator)
         self.labeMySeparatorCSVscatterSF.grid(row=1, column=6, sticky=E)
+
 
         self.varScatterPlotSF = IntVar()
         self.buttonvarScatterPlotSF = Checkbutton(self.scatterSF, text="Scatter 2D Plot", variable=self.varScatterPlotSF)
@@ -1411,11 +1557,15 @@ class MarineLitterManager:
 
 
 
+
+
     def checkGridXls(self, wichfield):
 
         mytext=self.FIELDBEACHES[int(wichfield)]
         tmpMyRow=int(self.entriesBeachesRow[int(wichfield)].get())-1
         tmpMyCol=int(self.LETTERS_ARRAY.index(self.entriesBeachesCol[int(wichfield)].get()))-1
+
+
 
 
         stringtmpMyRow=str(self.entriesBeachesRow[int(wichfield)].get())
@@ -1483,7 +1633,7 @@ class MarineLitterManager:
         stringtmpMyCol=str(self.LETTERS_ARRAY.index(self.entriesSurveysColSF[int(wichfield)].get()))
 
         wichSheet=int(self.entryInfoSurveysSF.get())-1
-        
+        #print(str(wichfield))
         if tmpMyRow != '':
             if tmpMyCol >= 0:
                 if wichSheet != '':
@@ -1492,10 +1642,10 @@ class MarineLitterManager:
                     try:
                         if wichfield in ('1','7','8','10','17','21'): # Need to manage the integer values (we have to cast them to delete the decimal)
                             actualvalue=math.floor(int(self.input_surveys_work_sheetSF.cell_value(tmpMyRow, tmpMyCol)))
-                            
+                            #print(str(wichfield))
                         else:
                             actualvalue=self.input_surveys_work_sheetSF.cell_value(tmpMyRow, tmpMyCol)
-                            
+                            #print(str(wichfield))
                     except Exception as e:
                         print("WARNING!", e, "occurred.")
                         self.infoSFarea.insert(END, '\nWARNING! ', e, ' ocurred.')
@@ -1733,8 +1883,10 @@ class MarineLitterManager:
         if selectedScrollListParams:
 
             for selectedParams in selectedScrollListParams:
-                
+
+                #print(str(selectedScrollListParams))
                 valueselectedScrollListParams = self.mylistScrollListSurveyParams.get(selectedParams)
+                #print(str(valueselectedScrollListParams))
 
                 tempWhichNameOutputFilePlotParams = str(self.entryInfoInputFilePlotParams.get())
                 if os.path.exists(tempWhichNameOutputFilePlotParams):
@@ -1747,10 +1899,12 @@ class MarineLitterManager:
                     allParamsValuePlot_current_row=1
                     allParamsValuePlot_num_rows = self.all_ParamsValuePlot_work_sheet.nrows
 
+
                     executeplotScatter=self.varScatterPlot.get()
                     executeplotScatterD=self.varScatterDPlot.get()
                     executeplotLegenda=self.varScatterLegendaPlot.get()
                     executeplotCSVGoogleMaps=self.varScatterCoordPlot.get()
+
 
                     paramLAT = []
                     paramLON = []
@@ -1768,6 +1922,8 @@ class MarineLitterManager:
                         GoogleMapsCSVOutputFile = open(GoogleMapsCSVName,"a")
                         GoogleMapsCSVOutputFile.write("ParamName,description,value,lat,lon")
 
+
+
                     while allParamsValuePlot_current_row < allParamsValuePlot_num_rows:
 
                         tmpParamsSurveyPlotName = str(self.all_ParamsValuePlot_work_sheet.cell_value(allParamsValuePlot_current_row, 2))
@@ -1779,6 +1935,8 @@ class MarineLitterManager:
                                 pardescription=str(self.all_ParamsValuePlot_work_sheet.cell_value(allParamsValuePlot_current_row, 3))
 
                             tmpParamsSurveyPlot=str(self.all_ParamsValuePlot_work_sheet.cell_value(allParamsValuePlot_current_row, 0))
+                            #print('Param:'+str(tmpParamsSurveyPlotName)+'-Value:'+str(tmpParamsValuePlot)+'-Survey:'+str(tmpParamsSurveyPlot))
+
 
                             allParamsSurveyPlot_current_row=1
                             allParamsSurveyPlot_num_rows = self.all_ParamsSurveyPlot_work_sheet.nrows
@@ -1795,11 +1953,13 @@ class MarineLitterManager:
                                     if tmpParamsLatString != '' and tmpParamsLonString != '' and int(tmpParamsValuePlot) > 0:
                                         tmpParamsLat=float(self.all_ParamsSurveyPlot_work_sheet.cell_value(allParamsSurveyPlot_current_row, 8))
                                         tmpParamsLon=float(self.all_ParamsSurveyPlot_work_sheet.cell_value(allParamsSurveyPlot_current_row, 9))
+                                        #print('Param:'+str(tmpParamsSurveyPlotName)+'-Value:'+str(tmpParamsValuePlot)+'-Survey:'+str(tmpParamsSurveyPlot)+'-LAT:'+str(tmpParamsLat)+'-LON:'+str(tmpParamsLon))
 
                                         paramLAT.append(float(self.all_ParamsSurveyPlot_work_sheet.cell_value(allParamsSurveyPlot_current_row, 8))) 
                                         paramLON.append(float(self.all_ParamsSurveyPlot_work_sheet.cell_value(allParamsSurveyPlot_current_row, 9)))
                                         paramVALUE.append(int(tmpParamsValuePlot))
 
+                                        #print('LAT:'+str(self.all_ParamsSurveyPlot_work_sheet.cell_value(allParamsSurveyPlot_current_row, 8))+'-Value:'+str(tmpParamsValuePlot)+'-LON:'+str(self.all_ParamsSurveyPlot_work_sheet.cell_value(allParamsSurveyPlot_current_row, 9)))
                                         # When we need to fill the Google Maps CSV file
                                         if executeplotCSVGoogleMaps == 1:
                                             GoogleMapsCSVOutputFile.write('\n'+str(valueselectedScrollListParams)+','+str(pardescription)+','+str(tmpParamsValuePlot)+','+str(self.all_ParamsSurveyPlot_work_sheet.cell_value(allParamsSurveyPlot_current_row, 8).replace(",","."))+','+str(self.all_ParamsSurveyPlot_work_sheet.cell_value(allParamsSurveyPlot_current_row, 9).replace(",",".")))
@@ -1821,18 +1981,23 @@ class MarineLitterManager:
                         self.infoBLarea.insert(END, "\n\nSCATTER PLOT 2D executed for param labelled "+str(valueselectedScrollListParams)+' '+pardescription)
                         fig1, scat1 = plt.subplots()
                     
+                        #myScatter = scat1.scatter(paramLON, paramLAT, s=paramVALUE, c=paramVALUE, alpha=0.5)
                         myScatter = scat1.scatter(paramLON, paramLAT, s=300, c=paramVALUE, alpha=0.5)
 
 
                         # produce a legend with the unique colors from the scatter
                         legend1 = scat1.legend(*myScatter.legend_elements(), loc="lower left", title="Number of items")
+                        #scat1.add_artist(legend1)
                     
                         if executeplotLegenda == 1:
                             # produce a legend with a cross section of sizes from the scatter
-
+                            #handles, labels = myScatter.legend_elements(prop="sizes", alpha=0.6)
+                            #legend2 = scat1.legend(handles, labels, loc="upper right", title="Sizes")
                             scat1.grid(True)
 
                         scat1.set_title('SCATTER PLOT executed for param labelled '+str(valueselectedScrollListParams)+'\n'+pardescription+'\n X-axis:Longitude, Y-axis:Latitude')
+
+
 
 
                     if executeplotScatterD == 1:
@@ -1847,8 +2012,13 @@ class MarineLitterManager:
 
                         scat2.set_title('3D SCATTER PLOT executed for param labelled '+str(valueselectedScrollListParams)+' '+pardescription+'\n X-axis:Longitude, Y-axis:Latitude')
 
+
+
+
                     if executeplotScatter == 1 or executeplotScatterD == 1:
                         plt.show()
+
+
 
         else:
 
@@ -1871,7 +2041,9 @@ class MarineLitterManager:
             for selectedSurvey in selectedScrollListSurvey:
                 
                 valueselectedScrollListSurvey = self.mylistScrollListSurvey.get(selectedSurvey)
-              
+        
+                #self.infoBLarea.insert(END, "\n\nPLOT executed for "+str(valueselectedScrollListSurvey))
+        
                 labels = []
                 labelsWithDesc = []
                 labelsDesc = []
@@ -1886,7 +2058,10 @@ class MarineLitterManager:
                 tempWhichNameOutputFilePlot = str(self.entryInfoInputFilePlotSurvey.get())
                 if os.path.exists(tempWhichNameOutputFilePlot):
         
+        
                     self.survyesPlot_book = xlrd.open_workbook(tempWhichNameOutputFilePlot)
+
+
 
                     self.all_surveysPlot_work_sheet = self.survyesPlot_book.sheet_by_index(3)
         
@@ -1911,7 +2086,7 @@ class MarineLitterManager:
                                     labelsDesc.append(str(self.all_surveys_work_sheet.cell_value(allsurveysPlot_current_row, 3)))                                   
                                     sizes.append(str(self.all_surveys_work_sheet.cell_value(allsurveysPlot_current_row, 5))) 
                                     sizesInt.append(int(self.all_surveys_work_sheet.cell_value(allsurveysPlot_current_row, 5))) 
-
+                                    #print(str(self.all_surveys_work_sheet.cell_value(allsurveysPlot_current_row, 5)))
                                     self.infoBLarea.insert(END, '\n'+str(self.all_surveys_work_sheet.cell_value(allsurveysPlot_current_row, 2))+' ('+str(self.all_surveys_work_sheet.cell_value(allsurveysPlot_current_row, 1))+')'+' ('+str(self.all_surveys_work_sheet.cell_value(allsurveysPlot_current_row, 3))+') N. of items: '+str(tmpFielNoItemValuePlot))
         
                             else :
@@ -1922,6 +2097,7 @@ class MarineLitterManager:
                                     labelsDesc.append(str(self.all_surveys_work_sheet.cell_value(allsurveysPlot_current_row, 3)))                                   
                                     sizes.append(str(self.all_surveys_work_sheet.cell_value(allsurveysPlot_current_row, 5))) 
                                     sizesInt.append(int(self.all_surveys_work_sheet.cell_value(allsurveysPlot_current_row, 5))) 
+                                    #print(str(self.all_surveys_work_sheet.cell_value(allsurveysPlot_current_row, 5)))
 
                                     self.infoBLarea.insert(END, '\n'+str(self.all_surveys_work_sheet.cell_value(allsurveysPlot_current_row, 2))+' ('+str(self.all_surveys_work_sheet.cell_value(allsurveysPlot_current_row, 1))+')'+' ('+str(self.all_surveys_work_sheet.cell_value(allsurveysPlot_current_row, 3))+') N. of items: '+str(tmpFielNoItemValuePlot))
         
@@ -1950,6 +2126,7 @@ class MarineLitterManager:
                                 tmpRebuiltDate = datetime.datetime(*xlrd.xldate_as_tuple(tmpFieldSurveyDate, self.survyesPlot_book.datemode))
                             else:
                                 tmpRebuiltDate = str(tmpFieldSurveyDate)
+                            #print(tmpRebuiltDate)
 
                             tmpFieldLatitudeStart=str(self.all_surveysMAPS_work_sheet.cell_value(allsurveysMAPS_current_row, 8))
                             tmpFieldLatitudeStop=str(self.all_surveysMAPS_work_sheet.cell_value(allsurveysMAPS_current_row, 10))
@@ -2093,17 +2270,20 @@ class MarineLitterManager:
                         else:
                             reader = csv.reader(csvFile, delimiter=',')
                             self.infoSFarea.insert(END, '\nCSV delimiter is: COMMA')
-                        
+                        #reader = csv.reader(csvFile)
                         for row in reader:
-                            
+                            #print(row)
+
                             tmpInputSurveyPlotValueSF = str(row[9])
         
                             if tmpInputSurveyPlotValueSF == self.SurveyNamesListSF[int(selectedSurveySF)] and countRow>=1:
-                               
+                                #print(str(row[28]))
+
                                 if row[31] != '':
-                                    
+                                    #print(str(row[28]))
                                     tmpFielNoItemValuePlot=float(row[31])
-                
+        
+        
                                     if tmpFielNoItemValuePlot > 0:
                                         labels.append(str(row[23]))                   
                                         sizes.append(str(row[31])) 
@@ -2113,7 +2293,7 @@ class MarineLitterManager:
 
 
                                 if countRow >= 1 and checkMetaData == 0:
-                                    
+                                    #print(countRow)
                                     tmpFieldLatitudeStart=str(row[12])
                                     tmpFieldLatitudeStop=str(row[14])
                                     tmpFieldLongitudeStart=str(row[13])
@@ -2143,7 +2323,11 @@ class MarineLitterManager:
         
                     self.infoSFarea.insert(END, "\nEND LIST ------------------------------------------------------------------------------------------")
 
-  
+
+
+
+        
+
         
                     if executePiePlotSF == 1: 
                         self.infoBLarea.insert(END, "\n\nPIE PLOT executed for "+str(valueselectedScrollListSurveySF))
@@ -2214,6 +2398,8 @@ class MarineLitterManager:
 
 
 
+
+
     def executePlotParamsSF(self):
 
         selectedScrollListParamsSF=self.mylistScrollListSurveyParamsSF.curselection()
@@ -2223,10 +2409,13 @@ class MarineLitterManager:
 
             for selectedParamsSF in selectedScrollListParamsSF:
 
+                #print(str(selectedScrollListParams))
                 valueselectedScrollListParamsSF = self.mylistScrollListSurveyParamsSF.get(selectedParamsSF)
+                #print(str(valueselectedScrollListParams))
 
                 tempWhichNameOutputFilePlotParamsSF = str(self.entryInfoInputFilePlotParamsSF.get())
                 if os.path.exists(tempWhichNameOutputFilePlotParamsSF):
+
 
                     countRow=0
                     checkMetaData=0
@@ -2236,6 +2425,7 @@ class MarineLitterManager:
                     executeplotLegenda=self.varScatterLegendaPlotSF.get()
                     executeplotCSVGoogleMaps=self.varScatterCoordPlotSF.get()
 
+
                     paramLAT = []
                     paramLON = []
                     paramVALUE = []
@@ -2243,6 +2433,7 @@ class MarineLitterManager:
                     del paramLAT [:]
                     del paramLON [:]
                     del paramVALUE [:]
+
 
                     # When we need to create the Google Maps CSV file
                     if executeplotCSVGoogleMaps == 1:
@@ -2258,12 +2449,15 @@ class MarineLitterManager:
                         else:
                             reader = csv.reader(csvFile, delimiter=',')
                             self.infoSFarea.insert(END, '\nCSV delimiter is: COMMA')
-                        
+                        #reader = csv.reader(csvFile)
                         for row in reader:
-                            
+                            #print(row)
+
+
                             tmpParamsSurveyPlotNameSF = str(row[23])
         
                             if str(tmpParamsSurveyPlotNameSF) == str(valueselectedScrollListParamsSF) and countRow>=1:
+             
 
                                 if row[31] != '':
                                     tmpParamsValuePlot=float(row[31])
@@ -2280,8 +2474,10 @@ class MarineLitterManager:
                                         if executeplotCSVGoogleMaps == 1:
                                             GoogleMapsCSVOutputFile.write('\n'+str(valueselectedScrollListParamsSF)+','+str(tmpParamsValuePlot)+','+str(row[12])+','+str(row[13]))
 
+                            
 
                             countRow += 1
+
 
                     # When we need to close the Google Maps CSV file
                     if executeplotCSVGoogleMaps == 1:
@@ -2297,7 +2493,9 @@ class MarineLitterManager:
                         self.infoSFarea.insert(END, "\n\nSCATTER PLOT 2D executed for param labelled "+str(valueselectedScrollListParamsSF))
                         fig1, scat1 = plt.subplots()
                     
+                        #myScatter = scat1.scatter(paramLON, paramLAT, s=paramVALUE, c=paramVALUE, alpha=0.5)
                         myScatter = scat1.scatter(paramLON, paramLAT, s=300, c=paramVALUE, alpha=0.5)
+
 
                         # produce a legend with the unique colors from the scatter
                         legend1 = scat1.legend(*myScatter.legend_elements(), loc="lower left", title="Number of items")
@@ -2305,7 +2503,8 @@ class MarineLitterManager:
                     
                         if executeplotLegenda == 1:
                             # produce a legend with a cross section of sizes from the scatter
-                            
+                            #handles, labels = myScatter.legend_elements(prop="sizes", alpha=0.6)
+                            #legend2 = scat1.legend(handles, labels, loc="upper right", title="Sizes")
                             scat1.grid(True)
 
                         scat1.set_title('SCATTER PLOT executed for param labelled '+str(valueselectedScrollListParamsSF)+'\n X-axis:Longitude, Y-axis:Latitude')
@@ -2324,6 +2523,9 @@ class MarineLitterManager:
                             scat2.view_init(elev=20., azim=-35)
 
                         scat2.set_title('3D SCATTER PLOT executed for param labelled '+str(valueselectedScrollListParamsSF)+'\n X-axis:Longitude, Y-axis:Latitude')
+
+
+
 
 
                     if executeplotScatter == 1 or executeplotScatterD == 1:
@@ -2379,6 +2581,7 @@ class MarineLitterManager:
         self.entryInfoInputFilePlotSurvey.delete(0,END)
         self.entryInfoInputFilePlotSurvey.insert(0,self.name)
         self.src = self.name
+        #self.bookPlotSurvey = xlrd.open_workbook(self.src)
         self.infoBLarea.insert(END, "\nBeach Litter Survey Plot File: "+str(self.name))
         self.checkPlots()
 
@@ -2395,6 +2598,7 @@ class MarineLitterManager:
         self.entryInfoInputFilePlotSurveySF.delete(0,END)
         self.entryInfoInputFilePlotSurveySF.insert(0,self.name)
         self.src = self.name
+        #self.bookPlotSurvey = xlrd.open_workbook(self.src)
         self.infoSFarea.insert(END, "\nSea Floor Litter Survey Plot File: "+str(self.name))
         self.checkPlotsSF()
 
@@ -2411,6 +2615,7 @@ class MarineLitterManager:
         self.entryInfoInputFilePlotParams.delete(0,END)
         self.entryInfoInputFilePlotParams.insert(0,self.name)
         self.src = self.name
+        #self.bookPlotParams = xlrd.open_workbook(self.src)
         self.infoBLarea.insert(END, "\nBeach Litter Params Plot File: "+str(self.name))
         self.checkPlotsParams()
 
@@ -2428,6 +2633,7 @@ class MarineLitterManager:
         self.entryInfoInputFilePlotParamsSF.delete(0,END)
         self.entryInfoInputFilePlotParamsSF.insert(0,self.name)
         self.src = self.name
+        #self.bookPlotParams = xlrd.open_workbook(self.src)
         self.infoSFarea.insert(END, "\nSea Floor Params Plot File: "+str(self.name))
         self.checkPlotsParamsSF()
 
@@ -2444,7 +2650,9 @@ class MarineLitterManager:
         self.entryInfoOutputFile.config(state = "readonly")
 
         self.createXlsOutput()
-
+        # will return "" if cancelled
+        #else:
+            #return filedialog.asksaveasfilename(**options)
 
 
 
@@ -2534,7 +2742,7 @@ class MarineLitterManager:
     def SearchLegendaTermFile(self,):
         searchTerm=self.entrylegendaTerm.get()
         self.legendaarea.delete('1.0', END)
-        
+        #print(searchTerm)
 
         executeLegendaSearch=self.varVocabBODClvLegenda.get()
         executeBODClvASearch=self.varVocabBODClvA.get()
@@ -2555,14 +2763,14 @@ class MarineLitterManager:
                     legendaTextUpper = le.readline()
                     legendaCheckText = le.readline()
                     if str(searchTerm.upper()) in str(legendaTextUpper.upper()):
-
+                        #print(str(searchTerm.upper())+' - '+str(legendaTextUpper.upper()))
                         self.legendaarea.insert(END, str(legendaTextUpper.upper())+"\n")
                         self.legendaarea.insert(END, "------------------------------------------------------------------------------------------\n")
                     if legendaCheckText == '':
                         # We have reached the end of the file
                         break
 
-        
+
         if executeBODClvASearch == 1:
             page_link = 'http://vocab.nerc.ac.uk/collection/H01/current/'+str(searchTerm.upper())
             self.legendaarea.insert(END, "---------------------SEARCH RESULT FOR BODC H01 VOCAB-------------------------------------\n")
@@ -2718,7 +2926,6 @@ class MarineLitterManager:
                     dictLitterTxt=str(preoutString[0])
                     self.legendaarea.insert(END, str(searchTerm.upper()+': '+dictLitterTxt.upper())+"\n")
                     self.legendaarea.insert(END, "------------------------------------------------------------------------------------------\n")
-            
 
 
 
@@ -2785,9 +2992,11 @@ class MarineLitterManager:
                 else:
                     reader = csv.reader(csvFile, delimiter=',')
                     self.infoSFarea.insert(END, '\nCSV delimiter is: COMMA')
-                
+                #reader = csv.reader(csvFile)
                 for row in reader:
-                                        
+                    #print(self.varRadioOutputCSV.get())
+                    
+                    
                     #We create a list with the uniques names of the surveys
                     try:
                         tmpInputSurveyValueSF = str(row[9])
@@ -2798,7 +3007,8 @@ class MarineLitterManager:
                         fname = os.path.split(exc_tb.tb_frame.f_code.co_filename)[1]
                         print(exc_type, fname, exc_tb.tb_lineno)
                         
-
+                    #print('test'+tmpInputSurveyValueSF)
+                    #tmpInputSurveyValueSF = str(row[9])
                     if tmpInputSurveyValueSF.index(tmpInputSurveyValueSF) == False and countRow>=1:
 
                         self.SurveyNamesListSF.append(tmpInputSurveyValueSF)
@@ -2822,6 +3032,8 @@ class MarineLitterManager:
         else:
 
             self.infoSFarea.insert(END, '\nThis file does not exists!')
+
+
 
 
     #Check if the output file already exist
@@ -2888,7 +3100,7 @@ class MarineLitterManager:
                     self.infoSFarea.insert(END, '\nCSV delimiter is: COMMA')
                 
                 for row in reader:
-                    
+                    #print(row)
                     try:
                         tmpInputParamsValueSF = str(row[23])
                         tmpParamsListValueSF = str(row[31])
@@ -3025,7 +3237,11 @@ class MarineLitterManager:
                     if int(ModelReadRow[1]) > 0:
                         self.R1Except.select()
                         print('Exception True '+str(ModelReadRow[1]))
-                      
+                    #else:
+                        #self.R1Except.set(False)
+                        #print('Exception False '+str(ModelReadRow[1]))
+                        
+
                 #LITTER
                 if ModelReadRow[0] == 'LITTER':
                     self.entriesLitterRowVarsSF[int(ModelReadRow[2])].set(int(ModelReadRow[3])+1)
@@ -3034,6 +3250,11 @@ class MarineLitterManager:
                 
 
         self.infoSFarea.insert(END, '\nThe model '+tempInport+' has been imported!')
+
+
+
+
+
 
 
 
@@ -3050,6 +3271,7 @@ class MarineLitterManager:
             pivoting=1
         else:
             pivoting=0
+
 
         # We start to save our preferences on a model
         tmpModelNameOut=str(self.entryInfoOutputModelFile.get())
@@ -3240,6 +3462,10 @@ class MarineLitterManager:
         tmpModelNameOut=str(self.entryInfoOutputModelFileSF.get())
 
 
+        #if os.path.exists(tmpModelNameOut):
+        #    os.remove(tmpModelNameOut)
+
+
         if tmpModelNameOut != '':
                 ModelName=str(self.entryInfoOutputModelFileSF.get())
         else:
@@ -3252,7 +3478,7 @@ class MarineLitterManager:
         ModelOutputFile.write("\nSHEETS,1,"+str(self.entryInfoLitterSF.get()))
 
 
-
+#SURVEYSEXCEPTION
         '''
         Read and write SURVEYS
         '''
@@ -3315,16 +3541,18 @@ class MarineLitterManager:
                 whichNameOutputFile = str(time.strftime("%Y%m%d%H%M%S")+'.csv')
 
         inputFileSF=self.entryInfoInputFileSF.get()
-        
+        #mytext=self.FIELDSURVEYSSEAFLOOR[int(wichfield)]
 
         '''
         Read and write SEA FLOOR
         '''
         wichSheetLitter=int(self.entryInfoLitterSF.get())-1
         wichSheetSurvey=int(self.entryInfoSurveysSF.get())-1
-
+        #litterWriterRowsTail = []
+        #litterWriterRowsHead = []
         allArrayInString = ''
-
+        #allSurveysMetadata = []
+        #allSurveysMetadata.append([])
         allSurveysMetadataFilteredUp = []
         allSurveysMetadataFiltered = []
         allLitterDataFiltered = []
@@ -3334,7 +3562,17 @@ class MarineLitterManager:
         self.input_survey_work_sheetSF = self.bookSF.sheet_by_index(wichSheetSurvey)
         litterSF_num_rows = self.input_litter_work_sheetSF.nrows
         surveysSF_num_rows = self.input_survey_work_sheetSF.nrows
-              
+        
+        
+        #fileTest = r"controllo_output.txt"
+        #try:
+        #    os.remove(fileTest)
+        #except OSError as e:
+        #    print(e)
+        #else:
+        #    print("File is deleted successfully")
+        #file_uno = open("controllo_output.txt","a")
+        
         
         allSurveysMetadata = [[0 for i in range(22)] for i in range(surveysSF_num_rows)]
         allLitterData = [[0 for i in range(13)] for i in range(litterSF_num_rows)]
@@ -3366,6 +3604,10 @@ class MarineLitterManager:
 
                     while surveysSF_current_row < surveysSF_num_rows:
 
+                        #actualvalue=str(self.input_survey_work_sheetSF.cell_value(surveysSF_current_row, tmpMyCol))
+                        #print(str(actualvalue))
+                        #allSurveysMetadata.append(str(actualvalue))
+                        #print(str(wichfield)+' - '+str(surveysSF_current_row))
 
                         if tmpMyCol < 0:
                             actualvalue=''
@@ -3375,6 +3617,9 @@ class MarineLitterManager:
                                 tmpValue_as_datetime=self.input_survey_work_sheetSF.cell_value(surveysSF_current_row, tmpMyCol)
                                 if tmpValue_as_datetime != '':
 
+                                    #year, month, day, hour, minute, second = xlrd.xldate_as_tuple(tmpValue_as_datetime, self.bookSF.datemode)
+                                    #actualvalue = datetime.datetime(year, month, day, hour, minute, second)
+                                    #print(tmpValue_as_datetime)
                                     if isinstance(tmpValue_as_datetime, datetime.datetime):
                                         try:
                                             actualvalue = datetime.datetime(*xlrd.xldate_as_tuple(tmpValue_as_datetime, self.bookSF.datemode))
@@ -3383,7 +3628,7 @@ class MarineLitterManager:
                                             self.infoSFarea.insert(END, '\nWARNING! ', e, ' ocurred.')
                                         
                                     else:
-
+                                        #actualvalue = datetime.datetime(*xlrd.xldate_as_tuple(tmpValue_as_datetime, self.bookSF.datemode))
                                         try:
                                             actualvalue=str(self.input_survey_work_sheetSF.cell_value(surveysSF_current_row, tmpMyCol))
                                         except Exception as e:
@@ -3395,7 +3640,20 @@ class MarineLitterManager:
                             else:
                                 try:
                                     if wichfield in (1,7,8,10,11,17,21) and self.input_survey_work_sheetSF.cell_value(surveysSF_current_row, tmpMyCol) != '': # Need to manage the integer values (we have to cast them to delete the decimal)
+                                        
                                         actualvalue=str(int(self.input_survey_work_sheetSF.cell_value(surveysSF_current_row, tmpMyCol)))
+                                        #actualvalue=str(int(self.input_survey_work_sheetSF.cell_value(surveysSF_current_row, tmpMyCol)))
+                                        # check if actual value of field 11 is "UNKCRS" very important!!!!
+                                        '''
+                                        if wichfield in (11):
+                                            try:
+                                                actualvalue=str(int(self.input_survey_work_sheetSF.cell_value(surveysSF_current_row, tmpMyCol)))
+                                            except:
+                                                actualvalue=str(self.input_survey_work_sheetSF.cell_value(surveysSF_current_row, tmpMyCol))
+                                        else:
+                                            actualvalue=str(int(self.input_survey_work_sheetSF.cell_value(surveysSF_current_row, tmpMyCol)))
+                                        '''   
+                                            
                                     elif wichfield in (12,13,14,15,16,18,19,20) and self.input_survey_work_sheetSF.cell_value(surveysSF_current_row, tmpMyCol) != '': # Need to manage the float values
                                         actualvalue=str(float(self.input_survey_work_sheetSF.cell_value(surveysSF_current_row, tmpMyCol)))
                                     else:
@@ -3426,16 +3684,16 @@ class MarineLitterManager:
                                 tmpMyColExcepHD=int(self.LETTERS_ARRAY.index(self.entriesSurveysColSF[int(23)].get()))-1
                                 TMPHaulDuration=str(int(self.input_survey_work_sheetSF.cell_value(tmpMyRowExcepHD, tmpMyColExcepHD)))
                                 #This list contains for each row: SurveyName,Shoot Timestamp,Haul Duration
-
+                                #print(str(self.input_survey_work_sheetSF.cell_value(surveysSF_current_row, tmpMyCol)+','+TMPShootTimestamp+','+TMPHaulDuration))
                                 if self.varRadioOutputCSV.get() == 1:
                                     allSurveysException[surveysSF_current_row]=str(self.input_survey_work_sheetSF.cell_value(surveysSF_current_row, tmpMyCol)+'\t'+TMPShootTimestamp+'\t'+TMPHaulDuration)
                                 else:
                                     allSurveysException[surveysSF_current_row]=str(self.input_survey_work_sheetSF.cell_value(surveysSF_current_row, tmpMyCol)+','+TMPShootTimestamp+','+TMPHaulDuration)
-
+                                #print(allSurveysException[surveysSF_current_row])    
                                 
                                 
                         allSurveysMetadata[surveysSF_current_row][wichfield]=actualvalue
-
+                        #print(str(actualvalue))
                         surveysSF_current_row += 1
 
 
@@ -3454,13 +3712,30 @@ class MarineLitterManager:
 
                     while litterSF_current_row < litterSF_num_rows:
 
+                        #actualvalueLitter=str(self.input_litter_work_sheetSF.cell_value(litterSF_current_row, tmpMyColLitter))
+                        #print(str(actualvalue))
+                        #allSurveysMetadata.append(str(actualvalue))
+                        #print(str(wichfield)+' - '+str(surveysSF_current_row))
 
                         if tmpMyColLitter < 0:
                             actualvalueLitter=''
                         else:
+                            '''
+                            try:
+                                if wichfield in (8,11): # Need to manage the integer values (we have to cast them to delete the decimal)
+                                    actualvalueLitter=str(int(self.input_litter_work_sheetSF.cell_value(litterSF_current_row, tmpMyColLitter)))
+                                elif wichfield in (7,9): # Need to manage the float values
+                                    actualvalueLitter=str(float(self.input_litter_work_sheetSF.cell_value(litterSF_current_row, tmpMyColLitter)))
+                                else:
+                                    actualvalueLitter=str(self.input_litter_work_sheetSF.cell_value(litterSF_current_row, tmpMyColLitter))
+
+                            except Exception as e:
+                                print("WARNING!", e, "occurred.")
+                                self.infoBLarea.insert(END, '\nWARNING! ', e, ' ocurred.')
+                                '''
                                 
                             actualvalueLitter=''
-
+                            #actualvalueLitter=str(self.input_litter_work_sheetSF.cell_value(litterSF_current_row, tmpMyColLitter))        
                             if wichfield in (9,11) and self.input_litter_work_sheetSF.cell_value(litterSF_current_row, tmpMyColLitter)!='': # Need to manage the integer values (we have to cast them to delete the decimal)
                                         
                                 actualvalueLitter=str(int(self.input_litter_work_sheetSF.cell_value(litterSF_current_row, tmpMyColLitter)))
@@ -3468,6 +3743,11 @@ class MarineLitterManager:
                             else:
                                
                                 actualvalueLitter=str(self.input_litter_work_sheetSF.cell_value(litterSF_current_row, tmpMyColLitter))
+                            '''        
+                            elif wichfield == 7: # Need to manage the float values
+                                
+                                actualvalueLitter=str(float(self.input_litter_work_sheetSF.cell_value(litterSF_current_row, tmpMyColLitter)))
+                            '''
                         
                         allLitterData[litterSF_current_row][wichfield]=str(actualvalueLitter)
 
@@ -3480,8 +3760,8 @@ class MarineLitterManager:
         # We have to change from a bi-dimensional list to a simple one dimension for Litter
         for tmpMyrowLitter in range (len(allLitterData)):
             if allLitterData[tmpMyrowLitter][0] != '' and allLitterData[tmpMyrowLitter][0] != 0: # We check the LTREF field (LitterReference for params)
-
-                
+                #print('Row number:'+str(tmpMyrow)+'\n')
+                #print(allSurveysMetadata[tmpMyrow])
                 if self.varRadioOutputCSV.get() == 1:
                     allLitterArrayInString='\t'.join(map(str, allLitterData[tmpMyrowLitter]))
                 else:
@@ -3489,51 +3769,79 @@ class MarineLitterManager:
                 allLitterDataFiltered.append(allLitterArrayInString)
         
         allLitterDataFiltered = list(set(allLitterDataFiltered))
-
+        
+        #file_uno.write('\n'+str(allLitterDataFiltered))
+        
+        
+        # We must check if the survey name (used for the exception) is inside each row of the litter data
+        # if yes, we overwrite the fields shhot timesstamp and haul duration
+        # only if the check button (checException) is active
+        #print(str(len(allSurveysException)))
+        #file_uno.write('\n'+str(allSurveysException))
+        
         
         if checException == 1 :
             tmpMyrowExceptions = 1
             while tmpMyrowExceptions < len(allSurveysException):
+            #for tmpMyrowExceptions in range (len(allSurveysException)):
                 # explode the exceptions values
+                
                 if self.varRadioOutputCSV.get() == 1:
                     mySurveyNameException = allSurveysException[tmpMyrowExceptions].split('\t')
                 else:
                     mySurveyNameException = allSurveysException[tmpMyrowExceptions].split(',')
                 
-
+                #mySurveyNameException = allSurveysException[tmpMyrowExceptions].split(',')
+                #print(allSurveysException[0])
+                #print(allSurveysException[1])
+                #print(allSurveysException[2])
                 for tmpMyrowLitterFilterExp in range (len(allLitterDataFiltered)):
+                    #if mySurveyNameException[0] in allLitterDataFiltered[tmpMyrowLitterFilterExp]:
                         
                         
-                    # if 'IN' we explode this field of the list and then we substitute the values
+                        #lst_check = np.array(allLitterDataFiltered[tmpMyrowLitterFilterExp])
+                        #result_check = np.where(lst_check == mySurveyNameException[0])
+                        #print(str(result_check))
+                        
+                        
+                        # if 'IN' we explode this field of the list and then we substitute the values
                     if self.varRadioOutputCSV.get() == 1:
                         OpenedAllLitterDataFiltered = allLitterDataFiltered[tmpMyrowLitterFilterExp].split('\t')
                     else:
                         OpenedAllLitterDataFiltered = allLitterDataFiltered[tmpMyrowLitterFilterExp].split(',')
-
+                        #print(str(len(allSurveysException)))
                     if mySurveyNameException[0] == OpenedAllLitterDataFiltered[12]:
-
+                        #file_uno.write('\n'+str(mySurveyNameException[0]+' = '+str(OpenedAllLitterDataFiltered[12])))
                         OpenedAllLitterDataFiltered[10]=mySurveyNameException[1]
-
+                        #print(str(mySurveyNameException[0])+' -> '+str(OpenedAllLitterDataFiltered[10])+'='+str(mySurveyNameException[1]))
+                        #print(str(OpenedAllLitterDataFiltered[11])+'='+str(mySurveyNameException[2]))
                         OpenedAllLitterDataFiltered[11]=mySurveyNameException[2]
                         # at last, we rebuild the correct shape of this field of the list
-
+                        #allLitterDataFiltered[tmpMyrowLitterFilterExp].join(",") # <-- WRONG!
+                        
+                        #file_uno.write('\n'+str(OpenedAllLitterDataFiltered[10])+' - '+str(OpenedAllLitterDataFiltered[11]))
                         
                         if self.varRadioOutputCSV.get() == 1:
                             allLitterDataFiltered[tmpMyrowLitterFilterExp]='\t'.join(str(e) for e in OpenedAllLitterDataFiltered)
                         else:
                             allLitterDataFiltered[tmpMyrowLitterFilterExp]=','.join(str(e) for e in OpenedAllLitterDataFiltered)
                        
-
+                        
+                        
+                    #file_uno.write('\n test  '+str(allLitterDataFiltered[tmpMyrowLitterFilterExp]))
+                        
+                    
                     
                 tmpMyrowExceptions = tmpMyrowExceptions+1
+            #print(str(tmpMyrowExceptions)+' = '+str(allSurveysException))
             
         
 
         # We have to change from a bi-dimensional list to a simple one dimension for Surveys
         for tmpMyrow in range (len(allSurveysMetadata)):
             if allSurveysMetadata[tmpMyrow][9] != '' and allSurveysMetadata[tmpMyrow][9] != 0: # We check the station name field (if exist then proceed)
-
-                
+                #print('Row number:'+str(tmpMyrow)+'\n')
+                #print(allSurveysMetadata[tmpMyrow])
                 if self.varRadioOutputCSV.get() == 1:
                     allArrayInString='\t'.join(map(str, allSurveysMetadata[tmpMyrow]))
                 else:
@@ -3543,9 +3851,15 @@ class MarineLitterManager:
 
 
 
+
+
+
+        #print(allSurveysMetadataFiltered)
         # All duplicated surveys must be merged
         allSurveysMetadataFiltered = list(set(allSurveysMetadataFiltered))
-
+        #print(str(allSurveysMetadataFiltered))
+        #file_uno.write('\n'+str(allSurveysMetadataFiltered))
+        #print(allSurveysMetadataFiltered)
         # We open the Sea Floor CSV outpu tfile
         CSVOutputFileSF = open(whichNameOutputFile,"a")
         # We save inside the Sea Floor CSV output file the labels
@@ -3557,23 +3871,28 @@ class MarineLitterManager:
 
         print(str(len(allSurveysMetadataFiltered))+" Lunghezza allSurveysMetadataFiltered")
         print(str(len(allLitterDataFiltered))+" Lunghezza allLitterDataFiltered")
-
+        #file_uno.write('\n'+str(allLitterDataFiltered))
         for tmpMyrowFilter in range (len(allSurveysMetadataFiltered)):
             if self.varRadioOutputCSV.get() == 1:
                 mySurveyName = allSurveysMetadataFiltered[tmpMyrowFilter].split('\t')  #mySurveyName[9] is the station name
             else:
                 mySurveyName = allSurveysMetadataFiltered[tmpMyrowFilter].split(',')
+            #print(str(tmpMyrowFilter))
             for tmpMyrowLitterFilter in range (len(allLitterDataFiltered)):
                 # If the station name exist in the litter's row the add surveys metadata
+                #print(str(mySurveyName[9])+" - "+str(allLitterDataFiltered[tmpMyrowLitterFilter]))
                 if self.varRadioOutputCSV.get() == 1:
                     checkMyStationmName = allLitterDataFiltered[tmpMyrowLitterFilter].split('\t')
                 else:
                     checkMyStationmName = allLitterDataFiltered[tmpMyrowLitterFilter].split(',')
                 
+                #if mySurveyName[9] in allLitterDataFiltered[tmpMyrowLitterFilter]:
                 if mySurveyName[9] == checkMyStationmName[12]:
-
+                #if mySurveyName[9] == allLitterDataFiltered[tmpMyrowLitterFilter][0]:
+                    #file_uno.write('\n Trovato '+str(mySurveyName[9])+' dentro la stringa '+str(allLitterDataFiltered[tmpMyrowLitterFilter]))
                     if self.varRadioOutputCSV.get() == 1:
                         tmpReplaceStationName=str('\t'+mySurveyName[9])
+                        #print(str(self.varRadioOutputCSV.get())+' radiobutton')
                     else:
                         tmpReplaceStationName=str(','+mySurveyName[9])
                     # We save inside the Sea Floor CSV output file the data
@@ -3583,6 +3902,12 @@ class MarineLitterManager:
                     else:
                         outputrowCSV='\n'+str(allSurveysMetadataFiltered[tmpMyrowFilter])+','+str(allLitterDataFiltered[tmpMyrowLitterFilter].replace(tmpReplaceStationName,''))
                     CSVOutputFileSF.write(outputrowCSV)
+                    #print(str(outputrowCSV))
+                    #file_uno.write(""+outputrowCSV)
+
+            #print('Row number:'+str(tmpMyrowFilter)+'\n')
+            #print(allSurveysMetadataFiltered[tmpMyrowFilter])
+            #file_uno.write('\n'+str(allSurveysMetadataFiltered[tmpMyrowFilter]))
 
 
 
@@ -3693,6 +4018,8 @@ class MarineLitterManager:
 
 
             # We save inside the model
+#            ModelOutputFile.write("\n"+str(wichSheet)+","+str(wichfield)+","+str(tmpMyRow)+","+str(tmpMyCol))
+
 
             if tmpMyRow != '':
                 #if tmpMyCol != '':
@@ -3719,7 +4046,7 @@ class MarineLitterManager:
                                     
                                     
                                 if tmpInputValue != '' and isinstance(tmpInputValue, datetime.datetime):
-
+                                    #print(str(tmpInputValue))
                                     try:
                                         tmpInputValue_as_datetime = datetime.datetime(*xlrd.xldate_as_tuple(tmpInputValue, self.book.datemode))
                                     except Exception as e:
@@ -3753,6 +4080,7 @@ class MarineLitterManager:
         '''
         for wichfield in range(58):
 
+            #print(str(wichfield))
             mytext=self.FIELDSURVEYS[int(wichfield)]
 
             tmpMyRow=''
@@ -3763,7 +4091,7 @@ class MarineLitterManager:
             if stringtmpMyRow != '':
                 tmpMyRow=int(self.entriesSurveysRow[int(wichfield)].get())-1
             if stringtmpMyCol != '':
-
+                #tmpMyCol=int(self.entriesSurveysCol[int(wichfield)].get())
                 tmpMyCol=int(self.LETTERS_ARRAY.index(self.entriesSurveysCol[int(wichfield)].get()))-1
 
             wichSheet=int(self.entryInfoSurveys.get())-1
@@ -3829,13 +4157,13 @@ class MarineLitterManager:
             if stringtmpMyRow != '':
                 tmpMyRow=int(self.entriesAnimalsRow[int(wichfield)].get())-1
             if stringtmpMyCol != '':
-
+                #tmpMyCol=int(self.entriesAnimalsCol[int(wichfield)].get())
                 tmpMyCol=int(self.LETTERS_ARRAY.index(self.entriesAnimalsCol[int(wichfield)].get()))-1
 
             wichSheet=int(self.entryInfoAnimals.get())-1
 
             if tmpMyRow != '':
-
+                #if tmpMyCol != '':
                 if tmpMyCol >= 0:
                     if wichSheet != '':
   
@@ -4000,6 +4328,9 @@ class MarineLitterManager:
                                     tmpParDescr_current_row=int(self.enWichSheetRow.get())
                                     tmpParDescr_current_col=int(self.LETTERS_ARRAY.index(self.enWichSheetCol.get()))-1
     
+                                    #tmpParDescrName_current_col=int(self.enWichSheetNameCol.get())
+                                    #tmpParDescrOriginalName_current_col=int(self.enWichSheetOriginalNameCol.get())
+
                                     tmpParDescrName_current_col=int(self.LETTERS_ARRAY.index(self.enWichSheetNameCol.get()))-1
                                     tmpParDescrOriginalName_current_col=int(self.LETTERS_ARRAY.index(self.enWichSheetOriginalNameCol.get()))-1
     
@@ -4359,6 +4690,13 @@ class MarineLitterManager:
 
 
 
+
+
+
+
+
+
+
         output_workbook.close()
 
 
@@ -4407,6 +4745,19 @@ class MarineLitterManager:
         '''
         Now we can write the list with the uniques values
         '''
+#        rb = xlrd.open_workbook(whichNameOutputFile)
+#        wb = copy(rb)
+#        s = wb.get_sheet(4)
+#        tempRow=0
+#        for i in range(len(arr)):
+#            if len(arr[i]) > 1:
+#                for v in range(len(arr[i])):
+#
+#                    s.write(tempRow, v, arr[i][v])
+#
+#                tempRow += 1
+#
+#        wb.save(whichNameOutputFile)
 
         self.infoBLarea.insert(END, '\nThe output XLS file labelled '+whichNameOutputFile+' has been created!')
 
@@ -4431,6 +4782,29 @@ def resource_path(relative_path):
 
 
 root = Tk()
+'''
+#GFirst version themes (defaults themes)
+style = ttk.Style(root)
+temi=style.theme_names()
+current_theme = style.theme_use()
+#print(str(temi))
+#For windows themes: ('winnative', 'clam', 'alt', 'default', 'classic', 'vista', 'xpnative')
+style.theme_use('xpnative')
+
+
+
+Second version themes
+TO ADD NEW THEMES:
+pip install ttkthemes
+
+N.B. The themes plastik, clearlooks and elegance are recommended to make your
+UI look nicer on all platforms when using Tkinter and the ttk extensions in Python.
+ When you are targeting Ubuntu, consider using the great radiance theme.
+'''
+#root.tk.call('source', 'C:/Users/Alex/Documents/PYTHON-OGS/litter/awthemes-10.4.0/awdark.tcl')
+#root.tk.call('lappend', 'auto_path', './awthemes-10.4.0')
+#root.tk.call('package', 'require', 'awdark')
+#root = ThemedTk(theme="plastik")
 root.option_add('*Font', 'Verdana 8')
 my_gui = MarineLitterManager(root)
 root.geometry('750x920')
@@ -4439,5 +4813,10 @@ while cols < 20:
     root.rowconfigure(cols, weight=1)
     root.columnconfigure(cols, weight=1)
     cols += 1
+
+
+#imgNODC = ImageTk.PhotoImage(file=resource_path('NODC.ico'))
+#root.tk.call('wm', 'iconphoto', root._w, imgNODC)
+
 
 root.mainloop()
