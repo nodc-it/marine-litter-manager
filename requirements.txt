@@ -1,5 +1,5 @@
 beautifulsoup4~=4.10.0
-matplotlib~=3.6.0
+matplotlib~=3.5.1
 numpy~=1.22.3
 Pillow~=9.3
 requests~=2.27.1
