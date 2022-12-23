@@ -7,13 +7,15 @@ Marine Litter Manager (MLM) is a Python data formatting tool that can be used to
 * EMODnet beach litter format
 * EMODnet seafloor trawlings litter format
 
-This is done following the specifications of the official guidelines published by [EMODnet Chemistry](https://www.emodnet-chemistry.eu/). It is available for Linux and Windows.
+This is done following the specifications of the official guidelines published by [EMODnet Chemistry](https://emodnet.ec.europa.eu/en/chemistry). It is available for Linux and Windows.
 
-The software is available for download at the following link: https://www.emodnet-chemistry.eu/marinelitter/manager
+The software is available for download at the following links: 
+* https://140.105.70.18/emodnet/repository/MLM/MLM_V0.0.2.10.exe
+* https://140.105.70.18/emodnet/repository/MLM/MLM_V0.0.2.10.zip
 
 The user manual is available at the following link: https://doi.org/10.13120/21addf37-7e82-4a55-b040-3d3d87115ac0
 
-The specific video tutorials are available at the following link: https://www.emodnet-chemistry.eu/help/littervideotutorial
+The specific video tutorials are available at the following link: https://www.youtube.com/playlist?list=PL_M9BQEHNdJGeSprzOJBrDVssVpiQepzN
 
 ## Available functions
 * Seafloor Litter formatting
