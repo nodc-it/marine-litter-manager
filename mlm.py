@@ -147,7 +147,7 @@ class MarineLitterManager:
     'FillingMail',
     'FillingInstitute',
     'UrbanizationDegree',
-    'Reference beach',
+    'ReferenceBeach',
     'BeachWidthLow',
     'BeachWidthHigh',
     'BeachLength',
@@ -235,8 +235,8 @@ class MarineLitterManager:
     'WeatherConditionsOther',
     'AnimalsFound',
     'AnimalsNumber',
-    'Circumstances',
-    'Events',
+    'SurveyCircumstances',
+    'SpecialEvents',
     'Notes',]
 
 
@@ -2641,7 +2641,7 @@ class MarineLitterManager:
 
 
     def SaveOutputFileXls(self,):
-        files = [('Excel Document', '*.xls')] 
+        files = [('Excel Document', '*.xlsx')] 
         file = asksaveasfile(filetypes = files, defaultextension = files)
 
         self.entryInfoOutputFile.config(state = NORMAL)
@@ -3277,178 +3277,181 @@ class MarineLitterManager:
         tmpModelNameOut=str(self.entryInfoOutputModelFile.get())
 
 
-        if os.path.exists(tmpModelNameOut):
-            os.remove(tmpModelNameOut)
+        
 
 
         if tmpModelNameOut != '':
                 ModelName=str(self.entryInfoOutputModelFile.get())
         else:
                 ModelName = str(time.strftime("%Y%m%d%H%M%S")+'.csv')
-
-        ModelOutputFile = open(ModelName,"a")
-
-        # We save inside the model
-        ModelOutputFile.write("SHEETS,0,"+str(self.entryInfoBeaches.get()))
-        ModelOutputFile.write("\nSHEETS,1,"+str(self.entryInfoSurveys.get()))
-        ModelOutputFile.write("\nSHEETS,2,"+str(self.entryInfoAnimals.get()))
-        ModelOutputFile.write("\nSHEETS,3,"+str(self.entryInfoLitter.get()))
-
-
-        '''
-        Read and write BEACHES
-        '''
-        for wichfield in range(42):
-
-            mytext=self.FIELDBEACHES[int(wichfield)]
-            tmpMyRow=''
-            tmpMyCol=''
-
-            tmpMyRow=int(self.entriesBeachesRow[int(wichfield)].get())-1
-            tmpMyCol=int(self.LETTERS_ARRAY.index(self.entriesBeachesCol[int(wichfield)].get()))-1
-            wichSheet=int(self.entryInfoBeaches.get())-1
+        #ModelName = str(time.strftime("%Y%m%d%H%M%S")+'.csv')
+        #ModelOutputFileWrite = open(ModelName,"w")
+        #ModelOutputFileWrite.close()
+        
+        #ModelOutputFile = open(ModelName,"a")
+        with open(ModelName,"a") as ModelOutputFile:
 
             # We save inside the model
-            ModelOutputFile.write("\nBEACHES,"+str(wichSheet)+","+str(wichfield)+","+str(tmpMyRow)+","+str(tmpMyCol))
-
-
-        '''
-        Read and write SURVEYS
-        '''
-        for wichfield in range(58):
-
-            mytext=self.FIELDSURVEYS[int(wichfield)]
+            ModelOutputFile.write("SHEETS,0,"+str(self.entryInfoBeaches.get()))
+            ModelOutputFile.write("\nSHEETS,1,"+str(self.entryInfoSurveys.get()))
+            ModelOutputFile.write("\nSHEETS,2,"+str(self.entryInfoAnimals.get()))
+            ModelOutputFile.write("\nSHEETS,3,"+str(self.entryInfoLitter.get()))
+    
+    
+            '''
+            Read and write BEACHES
+            '''
+            for wichfield in range(42):
+    
+                mytext=self.FIELDBEACHES[int(wichfield)]
+                tmpMyRow=''
+                tmpMyCol=''
+    
+                tmpMyRow=int(self.entriesBeachesRow[int(wichfield)].get())-1
+                tmpMyCol=int(self.LETTERS_ARRAY.index(self.entriesBeachesCol[int(wichfield)].get()))-1
+                wichSheet=int(self.entryInfoBeaches.get())-1
+    
+                # We save inside the model
+                ModelOutputFile.write("\nBEACHES,"+str(wichSheet)+","+str(wichfield)+","+str(tmpMyRow)+","+str(tmpMyCol))
+                print("\nBEACHES,"+str(wichSheet)+","+str(wichfield)+","+str(tmpMyRow)+","+str(tmpMyCol))
+    
+            '''
+            Read and write SURVEYS
+            '''
+            for wichfield in range(58):
+    
+                mytext=self.FIELDSURVEYS[int(wichfield)]
+                tmpMyRow=''
+                tmpMyCol=''
+    
+                tmpMyRow=int(self.entriesSurveysRow[int(wichfield)].get())-1
+                tmpMyCol=int(self.LETTERS_ARRAY.index(self.entriesSurveysCol[int(wichfield)].get()))-1
+                wichSheet=int(self.entryInfoSurveys.get())-1
+    
+                # We save inside the model
+                ModelOutputFile.write("\nSURVEYS,"+str(wichSheet)+","+str(wichfield)+","+str(tmpMyRow)+","+str(tmpMyCol))
+    
+    
+            '''
+            Read and write ANIMALS
+            '''
+            for wichfield in range(7):
+    
+                mytext=self.FIELDANIMALS[int(wichfield)]
+                tmpMyRow=''
+                tmpMyCol=''
+    
+                tmpMyRow=int(self.entriesAnimalsRow[int(wichfield)].get())-1
+                tmpMyCol=int(self.LETTERS_ARRAY.index(self.entriesAnimalsCol[int(wichfield)].get()))-1
+                wichSheet=int(self.entryInfoAnimals.get())-1
+    
+                # We save inside the model
+                ModelOutputFile.write("\nANIMALS,"+str(wichSheet)+","+str(wichfield)+","+str(tmpMyRow)+","+str(tmpMyCol))
+    
+    
+            '''
+            Read and write LITTER
+            '''
+    
+            #THE SURVEYCODE
+            wichfield=0
+            mytext=self.FIELDLITTER[int(wichfield)]
             tmpMyRow=''
             tmpMyCol=''
-
-            tmpMyRow=int(self.entriesSurveysRow[int(wichfield)].get())-1
-            tmpMyCol=int(self.LETTERS_ARRAY.index(self.entriesSurveysCol[int(wichfield)].get()))-1
-            wichSheet=int(self.entryInfoSurveys.get())-1
-
+            tmpMyRow=int(self.entriesLitterRow[int(wichfield)].get())-1
+            tmpMyCol=int(self.LETTERS_ARRAY.index(self.entriesLitterCol[int(wichfield)].get()))-1
+            wichSheet=int(self.entryInfoLitter.get())-1
             # We save inside the model
-            ModelOutputFile.write("\nSURVEYS,"+str(wichSheet)+","+str(wichfield)+","+str(tmpMyRow)+","+str(tmpMyCol))
-
-
-        '''
-        Read and write ANIMALS
-        '''
-        for wichfield in range(7):
-
-            mytext=self.FIELDANIMALS[int(wichfield)]
+            ModelOutputFile.write("\nLITTER,"+str(wichSheet)+","+str(wichfield)+","+str(tmpMyRow)+","+str(tmpMyCol))
+    
+    
+            #THE REFERENCE LIST
+            wichfield=1
+            mytext=self.FIELDLITTER[int(wichfield)]
             tmpMyRow=''
             tmpMyCol=''
-
-            tmpMyRow=int(self.entriesAnimalsRow[int(wichfield)].get())-1
-            tmpMyCol=int(self.LETTERS_ARRAY.index(self.entriesAnimalsCol[int(wichfield)].get()))-1
-            wichSheet=int(self.entryInfoAnimals.get())-1
-
+            tmpMyRow=int(self.entriesLitterRow[int(wichfield)].get())-1
+            tmpMyCol=int(self.LETTERS_ARRAY.index(self.entriesLitterCol[int(wichfield)].get()))-1
+            wichSheet=int(self.entryInfoLitter.get())-1
             # We save inside the model
-            ModelOutputFile.write("\nANIMALS,"+str(wichSheet)+","+str(wichfield)+","+str(tmpMyRow)+","+str(tmpMyCol))
-
-
-        '''
-        Read and write LITTER
-        '''
-
-        #THE SURVEYCODE
-        wichfield=0
-        mytext=self.FIELDLITTER[int(wichfield)]
-        tmpMyRow=''
-        tmpMyCol=''
-        tmpMyRow=int(self.entriesLitterRow[int(wichfield)].get())-1
-        tmpMyCol=int(self.LETTERS_ARRAY.index(self.entriesLitterCol[int(wichfield)].get()))-1
-        wichSheet=int(self.entryInfoLitter.get())-1
-        # We save inside the model
-        ModelOutputFile.write("\nLITTER,"+str(wichSheet)+","+str(wichfield)+","+str(tmpMyRow)+","+str(tmpMyCol))
-
-
-        #THE REFERENCE LIST
-        wichfield=1
-        mytext=self.FIELDLITTER[int(wichfield)]
-        tmpMyRow=''
-        tmpMyCol=''
-        tmpMyRow=int(self.entriesLitterRow[int(wichfield)].get())-1
-        tmpMyCol=int(self.LETTERS_ARRAY.index(self.entriesLitterCol[int(wichfield)].get()))-1
-        wichSheet=int(self.entryInfoLitter.get())-1
-        # We save inside the model
-        ModelOutputFile.write("\nLITTER,"+str(wichSheet)+","+str(wichfield)+","+str(tmpMyRow)+","+str(tmpMyCol))
-
-
-        #THE PARAMS
-        wichfield=2
-        mytext=self.FIELDLITTER[int(wichfield)]
-        #The params description is in another sheet
-        anotherSheet=self.var1ParDesc.get()
-        tmpMyRow=''
-        tmpMyCol=''
-        tmpMyRow=int(self.entriesLitterRow[int(wichfield)].get())-1
-        tmpMyCol=int(self.LETTERS_ARRAY.index(self.entriesLitterCol[int(wichfield)].get()))-1
-        wichSheet=int(self.entryInfoLitter.get())-1
-        # We save inside the model
-        ModelOutputFile.write("\nLITTER,"+str(wichSheet)+","+str(wichfield)+","+str(tmpMyRow)+","+str(tmpMyCol))
-
-
-        #ITEM NAME
-        wichfield=3
-        mytext=self.FIELDLITTER[int(wichfield)]
-        tmpMyRow=''
-        tmpMyCol=''
-        tmpMyRow=int(self.entriesLitterRow[int(wichfield)].get())-1
-        tmpMyCol=int(self.LETTERS_ARRAY.index(self.entriesLitterCol[int(wichfield)].get()))-1
-        wichSheet=int(self.entryInfoLitter.get())-1
-        # We save inside the model
-        ModelOutputFile.write("\nLITTER,"+str(wichSheet)+","+str(wichfield)+","+str(tmpMyRow)+","+str(tmpMyCol))
-
-
-        #ORIGINAL NAME
-        wichfield=4
-        mytext=self.FIELDLITTER[int(wichfield)]
-        tmpMyRow=''
-        tmpMyCol=''
-        tmpMyRow=int(self.entriesLitterRow[int(wichfield)].get())-1
-        tmpMyCol=int(self.LETTERS_ARRAY.index(self.entriesLitterCol[int(wichfield)].get()))-1
-        wichSheet=int(self.entryInfoLitter.get())-1
-        # We save inside the model
-        ModelOutputFile.write("\nLITTER,"+str(wichSheet)+","+str(wichfield)+","+str(tmpMyRow)+","+str(tmpMyCol))
-
-
-        #THE VALUES
-        wichfield=5
-        mytext=self.FIELDLITTER[int(wichfield)]
-        tmpMyRow=''
-        tmpMyCol=''
-        tmpMyRow=int(self.entriesLitterRow[int(wichfield)].get())-1
-        tmpMyCol=int(self.LETTERS_ARRAY.index(self.entriesLitterCol[int(wichfield)].get()))-1
-        wichSheet=int(self.entryInfoLitter.get())-1
-        # We save inside the model
-        ModelOutputFile.write("\nLITTER,"+str(wichSheet)+","+str(wichfield)+","+str(tmpMyRow)+","+str(tmpMyCol))
-
-
-        #THE NOTES
-        wichfield=6
-        mytext=self.FIELDLITTER[int(wichfield)]
-        tmpMyRow=''
-        tmpMyCol=''
-        tmpMyRow=int(self.entriesLitterRow[int(wichfield)].get())-1
-        tmpMyCol=int(self.LETTERS_ARRAY.index(self.entriesLitterCol[int(wichfield)].get()))-1
-        wichSheet=int(self.entryInfoLitter.get())-1
-        # We save inside the model
-        ModelOutputFile.write("\nLITTER,"+str(wichSheet)+","+str(wichfield)+","+str(tmpMyRow)+","+str(tmpMyCol))
-
-
-
-        # If the params are in another sheet
-        if anotherSheet == 1:
-
-                ModelparamSheet=int(self.enWichSheet.get())
-                ModeltmpParDescr_current_row=int(self.enWichSheetRow.get())
-                ModeltmpParDescr_current_col=int(self.LETTERS_ARRAY.index(self.enWichSheetCol.get()))-1
-                ModeltmpParDescrName_current_col=int(self.LETTERS_ARRAY.index(self.enWichSheetNameCol.get()))-1
-                ModeltmpParDescrOriginalName_current_col=int(self.LETTERS_ARRAY.index(self.enWichSheetOriginalNameCol.get()))-1
-                ModelOutputFile.write("\nANOTHER_SHEET,"+str(anotherSheet)+","+str(ModelparamSheet)+","+str(ModeltmpParDescr_current_row)+","+str(ModeltmpParDescr_current_col)+","+str(ModeltmpParDescrName_current_col)+","+str(ModeltmpParDescrOriginalName_current_col))
-
-        # Finally we close the model
-        ModelOutputFile.close()
+            ModelOutputFile.write("\nLITTER,"+str(wichSheet)+","+str(wichfield)+","+str(tmpMyRow)+","+str(tmpMyCol))
+    
+    
+            #THE PARAMS
+            wichfield=2
+            mytext=self.FIELDLITTER[int(wichfield)]
+            #The params description is in another sheet
+            anotherSheet=self.var1ParDesc.get()
+            tmpMyRow=''
+            tmpMyCol=''
+            tmpMyRow=int(self.entriesLitterRow[int(wichfield)].get())-1
+            tmpMyCol=int(self.LETTERS_ARRAY.index(self.entriesLitterCol[int(wichfield)].get()))-1
+            wichSheet=int(self.entryInfoLitter.get())-1
+            # We save inside the model
+            ModelOutputFile.write("\nLITTER,"+str(wichSheet)+","+str(wichfield)+","+str(tmpMyRow)+","+str(tmpMyCol))
+    
+    
+            #ITEM NAME
+            wichfield=3
+            mytext=self.FIELDLITTER[int(wichfield)]
+            tmpMyRow=''
+            tmpMyCol=''
+            tmpMyRow=int(self.entriesLitterRow[int(wichfield)].get())-1
+            tmpMyCol=int(self.LETTERS_ARRAY.index(self.entriesLitterCol[int(wichfield)].get()))-1
+            wichSheet=int(self.entryInfoLitter.get())-1
+            # We save inside the model
+            ModelOutputFile.write("\nLITTER,"+str(wichSheet)+","+str(wichfield)+","+str(tmpMyRow)+","+str(tmpMyCol))
+    
+    
+            #ORIGINAL NAME
+            wichfield=4
+            mytext=self.FIELDLITTER[int(wichfield)]
+            tmpMyRow=''
+            tmpMyCol=''
+            tmpMyRow=int(self.entriesLitterRow[int(wichfield)].get())-1
+            tmpMyCol=int(self.LETTERS_ARRAY.index(self.entriesLitterCol[int(wichfield)].get()))-1
+            wichSheet=int(self.entryInfoLitter.get())-1
+            # We save inside the model
+            ModelOutputFile.write("\nLITTER,"+str(wichSheet)+","+str(wichfield)+","+str(tmpMyRow)+","+str(tmpMyCol))
+    
+    
+            #THE VALUES
+            wichfield=5
+            mytext=self.FIELDLITTER[int(wichfield)]
+            tmpMyRow=''
+            tmpMyCol=''
+            tmpMyRow=int(self.entriesLitterRow[int(wichfield)].get())-1
+            tmpMyCol=int(self.LETTERS_ARRAY.index(self.entriesLitterCol[int(wichfield)].get()))-1
+            wichSheet=int(self.entryInfoLitter.get())-1
+            # We save inside the model
+            ModelOutputFile.write("\nLITTER,"+str(wichSheet)+","+str(wichfield)+","+str(tmpMyRow)+","+str(tmpMyCol))
+    
+    
+            #THE NOTES
+            wichfield=6
+            mytext=self.FIELDLITTER[int(wichfield)]
+            tmpMyRow=''
+            tmpMyCol=''
+            tmpMyRow=int(self.entriesLitterRow[int(wichfield)].get())-1
+            tmpMyCol=int(self.LETTERS_ARRAY.index(self.entriesLitterCol[int(wichfield)].get()))-1
+            wichSheet=int(self.entryInfoLitter.get())-1
+            # We save inside the model
+            ModelOutputFile.write("\nLITTER,"+str(wichSheet)+","+str(wichfield)+","+str(tmpMyRow)+","+str(tmpMyCol))
+    
+    
+    
+            # If the params are in another sheet
+            if anotherSheet == 1:
+    
+                    ModelparamSheet=int(self.enWichSheet.get())
+                    ModeltmpParDescr_current_row=int(self.enWichSheetRow.get())
+                    ModeltmpParDescr_current_col=int(self.LETTERS_ARRAY.index(self.enWichSheetCol.get()))-1
+                    ModeltmpParDescrName_current_col=int(self.LETTERS_ARRAY.index(self.enWichSheetNameCol.get()))-1
+                    ModeltmpParDescrOriginalName_current_col=int(self.LETTERS_ARRAY.index(self.enWichSheetOriginalNameCol.get()))-1
+                    ModelOutputFile.write("\nANOTHER_SHEET,"+str(anotherSheet)+","+str(ModelparamSheet)+","+str(ModeltmpParDescr_current_row)+","+str(ModeltmpParDescr_current_col)+","+str(ModeltmpParDescrName_current_col)+","+str(ModeltmpParDescrOriginalName_current_col))
+    
+            # Finally we close the model
+        #ModelOutputFile.close()
         self.infoBLarea.insert(END, '\nThe model labelled '+ModelName+' has been saved!')
 
 
@@ -3461,9 +3464,6 @@ class MarineLitterManager:
         # We start to save our preferences on a model
         tmpModelNameOut=str(self.entryInfoOutputModelFileSF.get())
 
-
-        #if os.path.exists(tmpModelNameOut):
-        #    os.remove(tmpModelNameOut)
 
 
         if tmpModelNameOut != '':
@@ -3683,12 +3683,13 @@ class MarineLitterManager:
                                 tmpMyRowExcepHD=int(self.entriesSurveysRowSF[int(23)].get())-1+surveysSF_current_row-1
                                 tmpMyColExcepHD=int(self.LETTERS_ARRAY.index(self.entriesSurveysColSF[int(23)].get()))-1
                                 TMPHaulDuration=str(int(self.input_survey_work_sheetSF.cell_value(tmpMyRowExcepHD, tmpMyColExcepHD)))
+                                #TMPHaulDuration=str(self.input_survey_work_sheetSF.cell_value(tmpMyRowExcepHD, tmpMyColExcepHD))
                                 #This list contains for each row: SurveyName,Shoot Timestamp,Haul Duration
                                 #print(str(self.input_survey_work_sheetSF.cell_value(surveysSF_current_row, tmpMyCol)+','+TMPShootTimestamp+','+TMPHaulDuration))
                                 if self.varRadioOutputCSV.get() == 1:
-                                    allSurveysException[surveysSF_current_row]=str(self.input_survey_work_sheetSF.cell_value(surveysSF_current_row, tmpMyCol)+'\t'+TMPShootTimestamp+'\t'+TMPHaulDuration)
+                                    allSurveysException[surveysSF_current_row]=str(self.input_survey_work_sheetSF.cell_value(surveysSF_current_row, tmpMyCol)+'\t'+TMPShootTimestamp+'\t'+str(TMPHaulDuration))
                                 else:
-                                    allSurveysException[surveysSF_current_row]=str(self.input_survey_work_sheetSF.cell_value(surveysSF_current_row, tmpMyCol)+','+TMPShootTimestamp+','+TMPHaulDuration)
+                                    allSurveysException[surveysSF_current_row]=str(self.input_survey_work_sheetSF.cell_value(surveysSF_current_row, tmpMyCol)+','+TMPShootTimestamp+','+str(TMPHaulDuration))
                                 #print(allSurveysException[surveysSF_current_row])    
                                 
                                 
@@ -3935,10 +3936,12 @@ class MarineLitterManager:
         format_date = output_workbook.add_format()
         format_date.set_num_format('mm/dd/yyyy')
 
-        beaches_output_worksheet = output_workbook.add_worksheet('Beaches')
+        beachesFiltered_output_worksheet = output_workbook.add_worksheet('Beaches')
         surveys_output_worksheet = output_workbook.add_worksheet('Surveys')
         animals_output_worksheet = output_workbook.add_worksheet('Animals')
         litter_output_worksheet = output_workbook.add_worksheet('Litter')
+        beaches_output_worksheet = output_workbook.add_worksheet('RemoveMe')
+        #beachesFiltered_output_worksheet = output_workbook.add_worksheet('BeachesFiltered')
 
 
         '''
@@ -4000,6 +4003,7 @@ class MarineLitterManager:
         '''
         We write temporary the BEACHES
         '''
+        checkTmpBeach=[]
         for wichfield in range(42):
 
             mytext=self.FIELDBEACHES[int(wichfield)]
@@ -4020,21 +4024,25 @@ class MarineLitterManager:
             # We save inside the model
 #            ModelOutputFile.write("\n"+str(wichSheet)+","+str(wichfield)+","+str(tmpMyRow)+","+str(tmpMyCol))
 
-
+            
             if tmpMyRow != '':
                 #if tmpMyCol != '':
                 if tmpMyCol >= 0:
                     if wichSheet != '':
 
 
-  
+                        
                         self.input_beaches_work_sheet = self.book.sheet_by_index(wichSheet)
   
                         beaches_current_row=tmpMyRow
                         beaches_num_rows = self.input_beaches_work_sheet.nrows
   
                         while beaches_current_row < beaches_num_rows:
-
+                            #if wichfield == 0: 
+                            #    checkTmpBeach.append(str(self.input_beaches_work_sheet.cell_value(beaches_current_row, 0)))
+                            #    print(str(self.input_beaches_work_sheet.cell_value(beaches_current_row, 0))+' - '+str(checkTmpBeach))
+                            #if str(self.input_beaches_work_sheet.cell_value(beaches_current_row, 0)) not in checkTmpBeach:
+                            #print(str(self.input_beaches_work_sheet.cell_value(beaches_current_row, 0))+' not in '+str(checkTmpBeach))
                             if wichfield == 4 or wichfield == 21:
 
                                 
@@ -4052,9 +4060,11 @@ class MarineLitterManager:
                                     except Exception as e:
                                         print("WARNING!", e, "occurred.")
                                         self.infoBLarea.insert(END, '\nWARNING! ', e, ' ocurred.')
-                                    
+                                        
+                                    #if str(self.input_beaches_work_sheet.cell_value(beaches_current_row, 0)) not in checkTmpBeach:
                                     beaches_output_worksheet.write(beaches_current_row, wichfield, tmpInputValue_as_datetime, format_date)
                                 else:
+                                    #if str(self.input_beaches_work_sheet.cell_value(beaches_current_row, 0)) not in checkTmpBeach:
                                     beaches_output_worksheet.write(beaches_current_row, wichfield, tmpInputValue)
                             else:
 
@@ -4065,10 +4075,15 @@ class MarineLitterManager:
                                     print("WARNING!", e, "occurred.")
                                     self.infoBLarea.insert(END, '\nWARNING! ', e, ' ocurred.')
                                     
-                                    
+                                
+                                #if str(self.input_beaches_work_sheet.cell_value(beaches_current_row, 0)) not in checkTmpBeach:
                                 beaches_output_worksheet.write(beaches_current_row, wichfield, tmpInputValue)
 
+                            
+                            
                             beaches_current_row += 1
+                            
+            
 
 
 
@@ -4701,7 +4716,7 @@ class MarineLitterManager:
 
 
         self.bookbis = xlrd.open_workbook(whichNameOutputFile)
-        self.beaches_output_worksheetTemp = self.bookbis.sheet_by_index(0)
+        self.beaches_output_worksheetTemp = self.bookbis.sheet_by_index(4)
 
         '''
         Start with a list for BEACHES uniques
@@ -4745,19 +4760,21 @@ class MarineLitterManager:
         '''
         Now we can write the list with the uniques values
         '''
-#        rb = xlrd.open_workbook(whichNameOutputFile)
-#        wb = copy(rb)
-#        s = wb.get_sheet(4)
-#        tempRow=0
-#        for i in range(len(arr)):
-#            if len(arr[i]) > 1:
-#                for v in range(len(arr[i])):
-#
-#                    s.write(tempRow, v, arr[i][v])
-#
-#                tempRow += 1
-#
-#        wb.save(whichNameOutputFile)
+        rb = xlrd.open_workbook(whichNameOutputFile)
+        wb = copy(rb)
+        s = wb.get_sheet(0)
+        tempRow=0
+        for i in range(len(arr)):
+            if len(arr[i]) > 1:
+                for v in range(len(arr[i])):
+
+                    s.write(tempRow, v, arr[i][v])
+
+                tempRow += 1
+        
+        #wb.remove(wb['BeachesToFilter'])
+        wb.save(whichNameOutputFile)
+        
 
         self.infoBLarea.insert(END, '\nThe output XLS file labelled '+whichNameOutputFile+' has been created!')
 
